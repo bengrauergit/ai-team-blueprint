@@ -9,7 +9,7 @@
 # CAUTION (learned in production): if multiple parallel sessions COMMIT this
 # file to a shared branch, their pushes race. Fix: add a .gitattributes line
 #   docs/agents/usage-log.jsonl merge=union
-# (append-only JSONL, line order irrelevant) — or keep the log local-only and
+# (append-only JSONL, line order irrelevant), or keep the log local-only and
 # roll it up daily from one stream. Defensive: never blocks anything.
 PAYLOAD=$(cat)
 LOG="${CLAUDE_PROJECT_DIR:-.}/docs/agents/usage-log.jsonl"

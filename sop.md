@@ -1,4 +1,4 @@
-# How We Operate — One-Page SOP
+# How We Operate: One-Page SOP
 
 The working rhythm under the agent-system blueprint. This is the quick card; `blueprint.md` is the full spec.
 
@@ -16,7 +16,7 @@ The working rhythm under the agent-system blueprint. This is the quick card; `bl
 
 6. **Ship as a draft PR with the evidence block** (change → runtime verified on → the receipt). Merge only after the gate. Never straight to main without it.
 
-7. **Close out.** Run any manual probes (tap the real app, test a real signup), tick the backlog entry, and record any external/dashboard change in `docs/infrastructure/` — an undocumented infra change is unfinished work.
+7. **Close out.** Run any manual probes (tap the real app, test a real signup), tick the backlog entry, and record any external/dashboard change in `docs/infrastructure/`. An undocumented infra change is unfinished work.
 
 ## Who to ask (one lens per question)
 
@@ -37,10 +37,10 @@ The working rhythm under the agent-system blueprint. This is the quick card; `bl
 
 ## Ceremonies (skills, run by the main session)
 
-- **`/standup`** — every session start. No advisors; it's a sync, not analysis.
-- **`/sprint-planning`** — each morning after standup.
-- **`/sprint-review`** — end of each day: what shipped, receipts, measures read.
-- **`/retro`** — when a day taught us something about process, landed in the repo.
+- **`/standup`**: every session start. No advisors; it's a sync, not analysis.
+- **`/sprint-planning`**: each morning after standup.
+- **`/sprint-review`**: end of each day (what shipped, receipts, measures read).
+- **`/retro`**: when a day taught us something about process, landed in the repo.
 
 ## Rules that never bend
 

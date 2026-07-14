@@ -1,5 +1,5 @@
 #!/bin/sh
-# Block direct pushes to main — merges go through a PR + the review gate.
+# Block direct pushes to main; merges go through a PR + the review gate.
 #
 # INSTALL: put this in .githooks/pre-push, then wire it per clone:
 #   git config core.hooksPath .githooks

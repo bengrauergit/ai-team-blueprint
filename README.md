@@ -1,8 +1,8 @@
 # AI Team Blueprint
 
-A complete system for orchestrating a team of AI agents to build software like a full delivery squad — solo.
+A complete system for orchestrating a team of AI agents to build software like a full delivery squad. Solo.
 
-This blueprint was developed while building a production web app solo over ~10 weeks: 300+ shipped pull requests, tens of thousands of lines of production code, one person. The speed came not from the AI itself, but from the system around it — the roles, the rules, the ceremonies, and the adversarial checks that stop bad ideas before they ship.
+This blueprint was developed while building a production web app solo over ~10 weeks: 300+ shipped pull requests, tens of thousands of lines of production code, one person. The speed came not from the AI itself, but from the system around it: the roles, the rules, the ceremonies, and the adversarial checks that stop bad ideas before they ship.
 
 ## What's in here
 
@@ -12,8 +12,8 @@ This blueprint was developed while building a production web app solo over ~10 w
 ├── sop.md                    # One-page standard operating procedure
 ├── agents/
 │   └── templates/            # Ready-to-use agent definitions
-│       ├── builder.md        # The engineer — the only one who writes code
-│       ├── red-teamer.md     # The devil's advocate — kills bad ideas
+│       ├── builder.md        # The engineer: the only one who writes code
+│       ├── red-teamer.md     # The devil's advocate, kills bad ideas
 │       ├── product-owner.md  # Outcomes, priorities, thinnest valuable slice
 │       ├── behavioural-scientist.md
 │       ├── growth-hacker.md
@@ -42,23 +42,23 @@ This blueprint was developed while building a production web app solo over ~10 w
 
 ## The core idea
 
-Stop using "an AI." Orchestrate a **bench of AIs** — each with a narrow job, real rules, and adversarial checks.
+Stop using "an AI." Orchestrate a **bench of AIs**: each with a narrow job, real rules, and adversarial checks.
 
 The system has four layers:
 
-1. **Agents** — specialist roles with defined responsibilities, tools, and constraints. One builder (writes code). Many advisors (read-only). One red-teamer whose only job is to prove the plan wrong.
+1. **Agents**: specialist roles with defined responsibilities, tools, and constraints. One builder (writes code). Many advisors (read-only). One red-teamer whose only job is to prove the plan wrong.
 
-2. **Rules** — operating principles born from real mistakes. "Nothing is done without a receipt from production." "Never state a conclusion from a search alone." These prevent the failure modes that burn days.
+2. **Rules**: operating principles born from real mistakes. "Nothing is done without a receipt from production." "Never state a conclusion from a search alone." These prevent the failure modes that burn days.
 
-3. **Ceremonies** — two lightweight rituals a day, not four: `/standup` (sync + plan the day, merged after we measured that separate standup/planning ceremonies were overhead a solo dev never amortized) and `/sprint-review` (what shipped, measures read against real numbers); `/retro` only when a day taught a real process lesson.
+3. **Ceremonies** are two lightweight rituals a day, not four: `/standup` (sync + plan the day, merged after we measured that separate standup/planning ceremonies were overhead a solo dev never amortized) and `/sprint-review` (what shipped, measures read against real numbers); `/retro` only when a day taught a real process lesson.
 
-4. **Enforcement** — hooks, CI, and source-level permissions for every rule that must never slip (see `hooks/README.md`). Prose rules drift; shell scripts don't. And measurement: the system logs its own agent usage and reads two workflow ratios (sprint-goal hit rate, process-vs-product commit share) so process growth stays visible and evidence-based.
+4. **Enforcement**: hooks, CI, and source-level permissions for every rule that must never slip (see `hooks/README.md`). Prose rules drift; shell scripts don't. And measurement: the system logs its own agent usage and reads two workflow ratios (sprint-goal hit rate, process-vs-product commit share) so process growth stays visible and evidence-based.
 
 ## The key insight
 
 AI amplifies good process and ruthlessly exposes bad process.
 
-A single AI agent will confidently give you the wrong answer and agree with whatever you already think. The fix isn't a better model — it's a better system:
+A single AI agent will confidently give you the wrong answer and agree with whatever you already think. The fix isn't a better model. It's a better system:
 
 - A **red-teamer** that challenges every significant decision before you commit
 - A **product owner** that cuts scope to the thinnest valuable slice
@@ -88,7 +88,7 @@ A single AI agent will confidently give you the wrong answer and agree with what
 
 4. **Adapt the agents** to your domain:
    - Rename them if you like (the names are just identifiers)
-   - Update `data-steward.md` for YOUR domain (it's a template — the original tracked surf forecast accuracy)
+   - Update `data-steward.md` for YOUR domain (it's a template; the original tracked surf forecast accuracy)
    - Add your project's MCP tools to each agent's `tools:` frontmatter
    - Read `blueprint.md` for the full system design
 
@@ -107,11 +107,11 @@ A single AI agent will confidently give you the wrong answer and agree with what
 | Scattered prompts, context bloat | Structured ceremonies, one lens per question |
 | AI hallucinates confidently | Every claim labelled MEASURED-FACT or INFERENCE |
 | Scope creep, gold-plating | Thinnest valuable slice, park the rest |
-| No memory between sessions | Rules and docs in the repo — the only thing that persists |
+| No memory between sessions | Rules and docs in the repo: the only thing that persists |
 
 ## Principles
 
-- **Default staffing: you + builder + at most one advisor.** Multi-agent work is the exception — it costs ~15x a single chat. Earn it.
+- **Default staffing: you + builder + at most one advisor.** Multi-agent work is the exception: it costs ~15x a single chat. Earn it.
 - **One lens per question.** Don't convene the panel. Pick the one agent whose question matches.
 - **Advisors advise; the builder builds.** Only one agent writes code. Everyone else is read-only.
 - **Rules are born from mistakes.** Every rule in `rules.md` exists because something went wrong without it.
@@ -124,8 +124,8 @@ This blueprint is stack-agnostic. The original was built on Next.js + Supabase +
 1. **Update the builder agent** with your specific runtimes and verification methods
 2. **Update the data-steward agent** for your domain (or remove it if you don't have domain data)
 3. **Add your MCP tools** to each agent's tool list
-4. **Customise the rules** — keep the principles, adapt the specifics to your stack
+4. **Customise the rules**: keep the principles, adapt the specifics to your stack
 
 ## License
 
-MIT — use it, adapt it, share it.
+MIT. Use it, adapt it, share it.

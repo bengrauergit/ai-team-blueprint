@@ -10,12 +10,12 @@ export const meta = {
 }
 
 // The canonical build loop (blueprint "Ralph loop", now in the REAL Workflow
-// format — the blueprint's former sketch used an invented API and would not
+// format: the blueprint's former sketch used an invented API and would not
 // run). Exit = receipts or an honest escalation, never a soft "should work".
 const MAX_PASSES = 5
 const { brief, criteria, architectureHeavy } = args ?? {}
 if (!brief || !criteria) {
-  return { status: 'error', reason: 'args.brief and args.criteria are required — an ungroomed story never enters the loop' }
+  return { status: 'error', reason: 'args.brief and args.criteria are required. An ungroomed story never enters the loop' }
 }
 
 let feedback = null
@@ -28,21 +28,21 @@ for (let pass = 1; pass <= MAX_PASSES; pass++) {
     [
       brief,
       `Completion criteria (checkable):\n${criteria}`,
-      feedback && `Previous UAT failures — fix these specifically:\n${feedback}`,
+      feedback && `Previous UAT failures. Fix these specifically:\n${feedback}`,
     ].filter(Boolean).join('\n\n'),
     {
       agentType: 'builder',
       label: `build:pass${pass}`,
       phase: 'Build',
       // Pin the model EXPLICITLY. An omitted model inherits the SESSION
-      // model, not the agent frontmatter — a loop launched from a cheap
+      // model, not the agent frontmatter; a loop launched from a cheap
       // session would silently build on the cheap tier (red-team finding).
       model: architectureHeavy === false ? 'sonnet' : 'opus',
     }
   )
 
   const verdict = await agent(
-    `Independent UAT against these acceptance criteria (walk the degenerate cases too):\n${criteria}\n\nFIRST, on pass 1 only: if any criterion is not objectively checkable (no observable pass/fail), return done=false with failures naming each unverifiable criterion — an unverifiable criterion is a grooming defect, not a pass.`,
+    `Independent UAT against these acceptance criteria (walk the degenerate cases too):\n${criteria}\n\nFIRST, on pass 1 only: if any criterion is not objectively checkable (no observable pass/fail), return done=false with failures naming each unverifiable criterion; an unverifiable criterion is a grooming defect, not a pass.`,
     {
       agentType: 'tester',
       label: `verify:pass${pass}`,
@@ -63,7 +63,7 @@ for (let pass = 1; pass <= MAX_PASSES; pass++) {
     return { status: 'done', passes: pass, receipts: verdict.receipts }
   }
   feedback = (verdict?.failures ?? ['tester returned no verdict']).join('\n')
-  log(`pass ${pass}: not done — ${verdict?.failures?.length ?? '?'} failures`)
+  log(`pass ${pass}: not done. ${verdict?.failures?.length ?? '?'} failures`)
 }
 
 return {

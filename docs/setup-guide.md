@@ -1,4 +1,4 @@
-# Setup Guide — Claude Code
+# Setup Guide: Claude Code
 
 Step-by-step instructions to set up the AI team blueprint in your project using Claude Code.
 
@@ -35,11 +35,11 @@ cp agents/templates/product-owner.md .claude/agents/
 
 Each agent template has comments showing what to customise:
 
-1. **builder.md** — Update the runtime map with YOUR specific runtimes and verification methods. Where does your code actually execute? What proves it's working there?
+1. **builder.md**: Update the runtime map with YOUR specific runtimes and verification methods. Where does your code actually execute? What proves it's working there?
 
-2. **data-steward.md** — This is a TEMPLATE. Replace the domain with yours (the original tracked surf forecast accuracy). If you don't have domain data to steward, skip this agent.
+2. **data-steward.md**: This is a TEMPLATE. Replace the domain with yours (the original tracked surf forecast accuracy). If you don't have domain data to steward, skip this agent.
 
-3. **All agents** — Add your project's MCP tools to each agent's `tools:` frontmatter if you use Supabase, Vercel, GitHub, or other connected services.
+3. **All agents**: Add your project's MCP tools to each agent's `tools:` frontmatter if you use Supabase, Vercel, GitHub, or other connected services.
 
 ## Step 4: Add the rules to CLAUDE.md
 
@@ -56,17 +56,17 @@ cat rules.md >> CLAUDE.md
 
 ## Step 5: Create the project context file
 
-Create `docs/agents/context.md` with canonical facts about your project — every agent reads this first:
+Create `docs/agents/context.md` with canonical facts about your project. Every agent reads this first:
 
 ```bash
 mkdir -p docs/agents
 ```
 
 Write a context file with:
-- **Stack** — what technologies, what versions
-- **Runtime map** — where code actually executes (bundler, deploy target, renderer, delivery surface)
-- **Known gotchas** — things that have burned time before
-- **Current state** — user count, stage, constraints
+- **Stack**: what technologies, what versions
+- **Runtime map**: where code actually executes (bundler, deploy target, renderer, delivery surface)
+- **Known gotchas**: things that have burned time before
+- **Current state**: user count, stage, constraints
 
 ## Step 6: Set up the backlog
 
@@ -107,7 +107,7 @@ Or describe what you need and Claude Code will suggest the right agent based on 
 
 ### The one-lens rule
 
-Pick ONE agent per question. Don't ask three agents the same thing — it produces the same advice in different jargon. The "when NOT to use me" section in each agent file has the tie-breaks.
+Pick ONE agent per question. Don't ask three agents the same thing. It produces the same advice in different jargon. The "when NOT to use me" section in each agent file has the tie-breaks.
 
 ## Customising further
 
@@ -122,11 +122,11 @@ tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, mcp__Supabase__execute_sql, 
 ### Changing model tiers
 
 Each agent has a `model:` field in its frontmatter. The defaults:
-- `opus` — for agents that need deep reasoning (red-teamer, security, behavioural scientist)
-- `sonnet` — for everyday work (builder, product owner, growth, designer, analysts)
-- `haiku` — for narrow, well-scoped tasks (tester, documentation, data steward)
+- `opus`: for agents that need deep reasoning (red-teamer, security, behavioural scientist)
+- `sonnet`: for everyday work (builder, product owner, growth, designer, analysts)
+- `haiku`: for narrow, well-scoped tasks (tester, documentation, data steward)
 
-Override per-invocation when needed — spawn the builder on Opus for architecture-heavy work.
+Override per-invocation when needed: spawn the builder on Opus for architecture-heavy work.
 
 ### Adding ceremony skills
 

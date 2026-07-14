@@ -1,0 +1,16 @@
+name: Copy style
+
+# This repo recommends gating house-style rules; it gates its own.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  copy-style:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: No em-dashes anywhere in the tree
+        run: sh scripts/copy-style-check.sh
