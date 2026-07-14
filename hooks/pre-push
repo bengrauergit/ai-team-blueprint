@@ -1,0 +1,19 @@
+#!/bin/sh
+# Block direct pushes to main — merges go through a PR + the review gate.
+#
+# INSTALL: put this in .githooks/pre-push, then wire it per clone:
+#   git config core.hooksPath .githooks
+# Automate the wiring in package.json:  "postinstall": "git config core.hooksPath .githooks || true"
+#
+# VERIFY IT FIRES (do not skip): `git push --dry-run origin HEAD:main` must
+# print the block message and exit 1. We ran for weeks believing this hook
+# was on while core.hooksPath was never set.
+while read local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/main)
+      echo "✗ pre-push: direct push to 'main' is blocked. Open a PR from a branch (review gate)." >&2
+      exit 1
+      ;;
+  esac
+done
+exit 0

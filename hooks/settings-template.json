@@ -1,0 +1,43 @@
+{
+  "//1": "Template for .claude/settings.json — TRACK THIS FILE IN GIT (add `!.claude/settings.json` to .gitignore after the `.claude/*` ignore). Personal grants go in settings.local.json (gitignored).",
+  "//2": "ALLOW list: auto-approve ONLY tools that are read-only AT THE SOURCE — e.g. a database MCP connector configured with a read-only role (Supabase: add ?read_only=true to the connector URL; then VERIFY with a write probe and watch the database refuse it). Never blanket-allow a tool that CAN write just because you mostly read with it.",
+  "//3": "ASK list: every write-capable tool prompts, every time. One convenient 'always allow' click on a write tool becomes a permanent silent grant.",
+  "//4": "Replace <READONLY_CONNECTOR> / <FULL_CONNECTOR> with your MCP server tool prefixes. NOTE: hosted-connector prefixes are per-connection hashes — if you re-add a connector, the hash changes and this list silently stops matching (it fails safe: prompts return). Re-check after any connector change.",
+  "permissions": {
+    "allow": [
+      "mcp__<READONLY_CONNECTOR>__execute_sql",
+      "mcp__<READONLY_CONNECTOR>__list_tables",
+      "mcp__<READONLY_CONNECTOR>__get_logs"
+    ],
+    "ask": [
+      "mcp__<FULL_CONNECTOR>__execute_sql",
+      "mcp__<FULL_CONNECTOR>__apply_migration"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/scripts/hooks/pre-commit-check.sh\"",
+            "timeout": 180,
+            "statusMessage": "Pre-commit check…"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/scripts/hooks/subagent-log.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
