@@ -48,6 +48,13 @@ jobs:
       - name: Golden gates
         run: npm test                  # ADAPT — your snapshot/golden checks
 
+      # Optional: a content/style gate. A written house-style rule (banned
+      # punctuation, words, phrasing) with no gate WILL be violated in-tree;
+      # scan marketing docs and copy-bearing source strings for your banned
+      # patterns and fail on hits.
+      # - name: Copy style check
+      #   run: ./scripts/copy-style-check.sh
+
       # CI runs on a runner, not your laptop: environment-dependent checks
       # (fonts, timezones, native binaries) may pass locally and fail here.
       # That divergence is SIGNAL — the runner is closer to prod than your laptop.

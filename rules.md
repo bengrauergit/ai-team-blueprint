@@ -93,3 +93,11 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 - **Prior-art check before any new deliverable.** Fetch, list branches, and grep for an existing version before building — in a multi-stream setup, assume someone may already have started it (two same-day collisions taught this).
 
 - **Sanitise at birth, not by audit.** Anything published externally gets the no-personal-data/no-product-references sweep AND an anonymised git identity BEFORE the first push. Retro-fitting cleanliness cost a public-history rewrite; doing it at creation costs one checklist pass.
+
+## Rules need landing spots and gates (added late 2026-07-14, from a second red-team pass)
+
+- **A style or content rule without a gate is a suggestion.** A tree carried four merged violations of its own written copy rule, with nothing to catch them. Engineering rules get typecheck and CI; content rules deserve the same: a banned-pattern scan over marketing docs and copy-bearing source strings, wired into CI. Durable-by-test is the only durability that survives sessions.
+
+- **Land every new rule the day it is learned, in a place that survives.** A rule living only in a PRD, a retro note, or one section of one doc is an orphan: the next consolidation drops it silently and nobody notices until it is violated. Two homes count: the always-loaded rules file, and a gate. Prefer both. Track unlanded rules in the backlog as first-class items.
+
+- **Gate honestly.** When a new gate lands, fix the violations it finds in the same slice. If legacy content carries many, scope the gate to what is clean today and surface the counts as a decision for the owner. Never mass-edit live copy just to green a new gate.
