@@ -7,9 +7,10 @@
 # seats actually earn their place. Collect ~2 weeks before acting on it.
 #
 # CAUTION (learned in production): if multiple parallel sessions COMMIT this
-# file to a shared branch, their pushes race. Let the log accumulate locally
-# and commit it with the day's work from ONE stream, or gitignore it and
-# aggregate another way. Defensive: never blocks anything.
+# file to a shared branch, their pushes race. Fix: add a .gitattributes line
+#   docs/agents/usage-log.jsonl merge=union
+# (append-only JSONL, line order irrelevant) — or keep the log local-only and
+# roll it up daily from one stream. Defensive: never blocks anything.
 PAYLOAD=$(cat)
 LOG="${CLAUDE_PROJECT_DIR:-.}/docs/agents/usage-log.jsonl"
 export PAYLOAD LOG
@@ -21,6 +22,10 @@ except Exception:
     d = {}
 keep = {k: v for k, v in d.items()
         if isinstance(v, (str, int, float, bool)) and len(str(v)) < 300}
+# Only log REAL team agents: harness-internal helpers fire SubagentStop with a
+# blank agent_type and inflate roster metrics (~3x in production measurement).
+if not keep.get("agent_type"):
+    raise SystemExit(0)
 keep["ts"] = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
 os.makedirs(os.path.dirname(os.environ["LOG"]), exist_ok=True)
 with open(os.environ["LOG"], "a") as f:

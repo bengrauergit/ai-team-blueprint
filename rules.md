@@ -87,3 +87,9 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 - **Measure the workflow itself, or process grows unchecked.** Two ratios, read in the existing review ceremony: (1) sprint-goal hit rate; (2) process-vs-product commit share. Our audit found 51% of a week's commits were process scaffolding on a product with only a handful of real users — visible only because someone went looking. Make the ceremony surface it automatically.
 
 - **Measure before you elaborate the roster.** Log agent usage (a SubagentStop hook appending one line per run), collect ~2 weeks, THEN decide which seats earn their place. Rosters grow on vibes and never shrink on their own. Caution: keep the raw log out of shared branches — parallel streams committing one append-only file is a conflict factory.
+
+- **P1-first.** When a signed-off P1 exists, meta/process work starts only after an explicit "defer" from the owner — measured failure mode: the day's P1 ran last and nearly missed the day while ops work ran first.
+
+- **Prior-art check before any new deliverable.** Fetch, list branches, and grep for an existing version before building — in a multi-stream setup, assume someone may already have started it (two same-day collisions taught this).
+
+- **Sanitise at birth, not by audit.** Anything published externally gets the no-personal-data/no-product-references sweep AND an anonymised git identity BEFORE the first push. Retro-fitting cleanliness cost a public-history rewrite; doing it at creation costs one checklist pass.
