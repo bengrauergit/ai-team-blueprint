@@ -13,7 +13,14 @@ export const meta = {
 // format: the blueprint's former sketch used an invented API and would not
 // run). Exit = receipts or an honest escalation, never a soft "should work".
 const MAX_PASSES = 5
-const { brief, criteria, architectureHeavy } = args ?? {}
+// Tolerate args arriving as a JSON-encoded string: the harness can deliver
+// the Workflow `args` parameter stringified rather than as an object (two
+// live invocations bounced on this in production before the tolerance).
+let parsedArgs = args
+if (typeof parsedArgs === 'string') {
+  try { parsedArgs = JSON.parse(parsedArgs) } catch { /* error below names the problem */ }
+}
+const { brief, criteria, architectureHeavy } = parsedArgs ?? {}
 if (!brief || !criteria) {
   return { status: 'error', reason: 'args.brief and args.criteria are required. An ungroomed story never enters the loop' }
 }
