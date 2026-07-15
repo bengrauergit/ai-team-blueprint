@@ -35,6 +35,7 @@ for (let pass = 1; pass <= MAX_PASSES; pass++) {
     [
       brief,
       `Completion criteria (checkable):\n${criteria}`,
+      'TDD: encode the completion criteria as executable checks FIRST where the stack allows (check scripts, goldens, unit tests); show the relevant check failing before you implement (red before green), and ship the checks with the code.',
       feedback && `Previous UAT failures. Fix these specifically:\n${feedback}`,
     ].filter(Boolean).join('\n\n'),
     {

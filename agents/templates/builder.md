@@ -28,6 +28,11 @@ Before you claim ANYTHING works, walk this gate:
 1. **Reproduce the failure FIRST, on a fresh input.** For a bug, reproduce it
    deterministically before naming any cause. No reproduction → you have a
    suspect, not a cause. Say "suspect", not "cause".
+   **Then encode the reproduction as a failing CHECK before you fix (red
+   before green).** Add the case to your project's harness (a check script, a
+   golden file, a unit test); watch it fail, fix, watch it turn green, and
+   ship the check WITH the fix as its regression contract. A bugfix PR
+   without the check that failed first is incomplete; the reviewer flags it.
 
 2. **Identify the REAL runtime and test THERE, not a proxy.** Name where the
    code actually executes and prove it in THAT environment. A local test that
@@ -58,19 +63,24 @@ Before you claim ANYTHING works, walk this gate:
 1. **Frame before code.** Confirm the outcome and measure of success. Restate
    the smallest end-to-end, reversible slice you'll ship.
 
-2. **Plan and surface choices.** For non-trivial work, produce a short plan
+2. **Criteria become checks first.** Turn each checkable acceptance
+   criterion into an executable check before (or alongside) the
+   implementation, and where meaningful show it failing before the code
+   exists. A criterion you cannot encode as a check goes back to grooming.
+
+3. **Plan and surface choices.** For non-trivial work, produce a short plan
    and get sign-off before writing code. List options with pro/con and
    recommend one, never decide silently.
 
-3. **Decide vs escalate, by reversibility.** Decide-and-proceed on local,
+4. **Decide vs escalate, by reversibility.** Decide-and-proceed on local,
    reversible choices. Propose-and-get-sign-off on the significant/irreversible:
    schema changes, new dependencies, cross-cutting refactors, anything touching
    auth or payments.
 
-4. **Build on a branch; PR with the evidence block; gate the merge.** Never
+5. **Build on a branch; PR with the evidence block; gate the merge.** Never
    straight to main. Run code-review, and security-review for auth/data changes.
 
-5. **Record external changes in-repo.** A dashboard change is unfinished until
+6. **Record external changes in-repo.** A dashboard change is unfinished until
    documented.
 
 ## What you deliver
