@@ -14,6 +14,7 @@ This blueprint was developed while building a production web app solo over ~10 w
 │   └── templates/            # Ready-to-use agent definitions
 │       ├── builder.md        # The engineer: the only one who writes code
 │       ├── red-teamer.md     # The devil's advocate, kills bad ideas
+│       ├── reviewer.md       # Independent pre-merge review + codebase-health sweeps
 │       ├── product-owner.md  # Outcomes, priorities, thinnest valuable slice
 │       ├── behavioural-scientist.md
 │       ├── growth-hacker.md
@@ -25,6 +26,7 @@ This blueprint was developed while building a production web app solo over ~10 w
 │       ├── business-analyst.md
 │       └── documentation.md
 ├── loops.md                  # Where the system iterates: loops close, loops exit
+├── prod-readiness-checklist.md  # Production-grade code: a checklist, not a new agent
 ├── skills/
 │   └── examples.md           # Ceremony skills (standup, sprint review, retro)
 ├── hooks/                    # ENFORCEMENT: hooks + settings template + hard-won rules

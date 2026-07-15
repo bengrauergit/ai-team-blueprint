@@ -1,79 +1,75 @@
 # Ceremony Skills: Examples
 
-These are example skill definitions for the Agile ceremonies referenced in the blueprint. Create them in your project's `.claude/skills/` directory.
+These are example skill definitions for the ceremonies referenced in the blueprint. Create them in your project's `.claude/skills/` directory.
 
-## Standup
+**Two ceremonies a day, not four.** We started with standup, sprint planning, sprint review, and retro as separate daily rituals. Measured over a few weeks: the retro never ran, and standup and planning were the same five-minute conversation held twice. A solo owner does not amortize four daily ceremonies. So: a merged morning ceremony (sync AND plan), an evening close, and a retro that fires only on a real lesson. If you have a team rather than a solo owner, splitting them again may earn its cost; measure before you assume it does.
+
+## Standup (the morning ceremony: sync AND plan the day)
 
 **File:** `.claude/skills/standup/SKILL.md`
 
 ```markdown
-# Standup
+# Standup + plan the day
 
-Run at the start of each working session. Build the status from repo state, never from memory.
+Run at the start of each working session. Build everything from repo state, never from memory. The default morning briefs zero agents.
 
-1. **Shipped**: read `git log` for commits since the last standup (or the last working day). Summarise what shipped.
-2. **Next**: read `BACKLOG.md` → Current sprint section. What's the next priority?
-3. **Blocked**. Check for: failing CI, open review comments, unmerged dependencies, missing env vars, undocumented infra state.
+## 1. Gather state
+- `git fetch`, then read the log for what merged since the last session. Never trust a stale local snapshot: in a multi-stream setup, assume the world moved.
+- List branches and open PRs: what is in flight, what awaits review.
+- Read `BACKLOG.md` (keep it short: current sprint plus a "next up" queue of about ten; everything older lives in an archive file you grep, not read).
+- Check for uncommitted work: ephemeral containers make it a standing risk.
 
-Output: a short summary (shipped / next / blocked) and a proposed priority for today. Ask for confirmation before proceeding.
+## 2. Report: shipped / next / blocked
+- **Shipped**: what merged, each with its receipt status (verified on the real runtime, or "verified through hop N, unverified beyond").
+- **Next**: the one thing to do first, as a thin slice with its measure of success.
+- **Blocked**: anything waiting on the owner, each with the exact ask.
+
+## 3. Plan the day
+- Propose the day's slices from carry-overs and the queue: each with an outcome, a measure of success, and acceptance criteria including degenerate cases.
+- **P1-first guardrail:** if a signed-off P1 is open, it is slice #1. Meta or process work scheduled ahead of it needs an explicit "defer the P1" from the owner, recorded in the sprint notes.
+- **Prior-art check:** before committing to build any new deliverable, grep the repo and list branches for an existing version. Parallel streams collide otherwise.
+- **Grooming gate:** work enters the sprint only as a groomed story (standard format, checkable acceptance criteria, named outcome). An ungroomed entry goes back to grooming, not into the sprint.
+- Brief an advisor only on a named trigger, one lens per question: priorities genuinely unclear → product-owner; entry fuzzy → business-analyst; anything hard to reverse → red-teamer; new paid service or send volume → data-analyst.
+
+## 4. Sign off, then document
+Write the agreed plan into `BACKLOG.md` and commit it. The plan is repo memory, not chat memory.
 ```
 
-## Sprint Planning
-
-**File:** `.claude/skills/sprint-planning/SKILL.md`
-
-```markdown
-# Sprint Planning
-
-Run each morning after standup. A sprint is one working day.
-
-1. Read `BACKLOG.md`: the prioritised backlog.
-2. Pick the top-priority item that's ready (has acceptance criteria). If the top item is fuzzy, invoke the business-analyst to groom it first.
-3. Confirm the **measure of success**: the signal that tells us this slice worked.
-4. Confirm the **acceptance criteria**, including degenerate cases.
-5. For non-trivial slices, invoke the red-teamer to pressure-test the plan before committing.
-6. Write the day's commitment to the Current sprint section of `BACKLOG.md`.
-
-Output: the day's one thin slice, with outcome, measure, and acceptance criteria confirmed.
-```
-
-## Sprint Review
+## Sprint Review (the evening close)
 
 **File:** `.claude/skills/sprint-review/SKILL.md`
 
 ```markdown
 # Sprint Review
 
-Run at the end of each working day.
+Run at the end of each working day. The standard is the last-hop rule: a story is "shipped" only with a receipt from the real runtime; otherwise report it as "merged, unverified beyond hop N" and name the missing probe.
 
-1. Read `git log` for today's commits. What shipped?
-2. For each shipped slice, check: does it have the receipt (evidence from the last hop)?
-3. Read the measure of success from this morning's planning. Can we read the measure yet? If so, what does it say?
-4. Note carry-overs: what was planned but didn't ship, and why.
-5. Update `BACKLOG.md`: tick shipped entries, note carry-overs.
+1. Diff the sprint plan against reality (`git log`, merged PRs). Per story: shipped-with-receipt / merged-but-unverified / not shipped (carried, cut, or blocked, with why).
+2. **Read the measures of success against real numbers.** Run the read-only queries yourself; at small scale these are hand-countable. A measure that turns out never to have been instrumented is a finding: report it and add the instrumentation to the backlog.
+3. **Report two workflow-health ratios** (this is how the process stays honest about itself):
+   - **Sprint-goal hit rate to date**: goals met versus sprints reviewed, as a running tally. A run of misses means the planning step is broken, not the building step.
+   - **Process-vs-product commit split**: commits touching agent/process/config files versus total. A high process share flags a day that built machinery instead of product. We measured 51% on a real week; it was invisible until someone counted.
+4. **Read your database's advisors** (security and performance lints): report new ones only, each as a proposed backlog entry.
+5. Capture every piece of owner feedback durably in `BACKLOG.md` immediately. Feedback that lives only in chat is lost.
 
-Output: shipped (with receipts) / carried over (with reasons) / measures read.
+Output: shipped with receipts / carried with reasons / measures read / the two ratios.
 ```
 
-## Retro
+## Retro (event-driven, not ritual)
 
 **File:** `.claude/skills/retro/SKILL.md`
 
 ```markdown
 # Retro
 
-Run after a day with a real process learning, not ritually every evening.
+Run after a day that produced a real process learning or a painful episode. NOT every evening: a retro without a lesson produces ceremony, not process.
 
-1. What worked well today? (Keep doing)
-2. What didn't work? (Stop or change)
-3. What did we learn about the process? (The learning, not the feature)
-4. What action items come out of this? Route each to the right place:
-   - Process change → update `CLAUDE.md` or agent definitions
-   - New rule → add to `rules.md` / `CLAUDE.md`
-   - Backlog item → append to `BACKLOG.md`
-   - Documentation → hand to the documentation agent
+1. What worked? What did not? What did we learn about HOW we work (the process, not the feature)?
+2. **Land every learning in a durable home, the same day.** A rule that lives only in chat or in one scoped doc does not exist: the next consolidation drops it silently. Two homes count: the always-loaded rules file, and a gate. Prefer both.
+3. **Prefer the gate.** If the learning can be a hook, a CI check, or a permission, build that instead of writing a sentence. Prose rules decay; shell scripts do not.
+4. Route the rest: process change → the rules file or an agent definition; work → the backlog; facts about external state → your infrastructure docs.
 
-Output: learnings landed in the repo (not just discussed).
+Output: learnings landed in the repo, ideally as enforcement rather than prose.
 ```
 
 ## How to create a skill

@@ -113,3 +113,7 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 ## Loops close and loops exit
 
 - **A loop that does not return signal to its own start is a queue in disguise.** Before adding one, name what comes back around and who reads it. Every loop carries a bounded exit: a pass cap with honest escalation, a collection window with a decision date, or an event trigger that fires rarely by design. Full taxonomy: `loops.md`.
+
+## Production-readiness is a checklist, not a persona
+
+- **Before adding an agent, ask what it knows that an existing one does not.** "AI code is not production grade" is a real concern with a cheap answer: give the reviewer you already have a robustness-first checklist (`prod-readiness-checklist.md`) and an event trigger (a diff that adds a scheduled job, an external-call site, or a public endpoint). A new persona would overlap the reviewer on most of the job and cost a standing seat. Persona proliferation is the most common failure of multi-agent setups; the litmus test is unforgiving and worth applying every time.
