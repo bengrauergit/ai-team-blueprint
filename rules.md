@@ -101,3 +101,11 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 - **Land every new rule the day it is learned, in a place that survives.** A rule living only in a PRD, a retro note, or one section of one doc is an orphan: the next consolidation drops it silently and nobody notices until it is violated. Two homes count: the always-loaded rules file, and a gate. Prefer both. Track unlanded rules in the backlog as first-class items.
 
 - **Gate honestly.** When a new gate lands, fix the violations it finds in the same slice. If legacy content carries many, scope the gate to what is clean today and surface the counts as a decision for the owner. Never mass-edit live copy just to green a new gate.
+
+## Red before green (test-driven, agent-side)
+
+- **A bugfix without a test that failed first is a hypothesis.** The builder encodes the reproduction as a failing check BEFORE fixing, watches it turn green, and ships the check with the fix as its regression contract. The reviewer treats a bugfix diff arriving without its red-first check as incomplete, not as a style preference.
+
+- **Acceptance criteria become executable checks in the same slice.** A criterion that cannot be encoded as a check is a grooming defect, not a testing gap; send it back to grooming. No new framework is required: lightweight check scripts and golden files are a fine harness, and the CI you already run picks new checks up automatically.
+
+- **Zero ceremony for the owner.** The human writes acceptance criteria once (the grooming gate already requires that); the agents do the red-green-refactor. The only visible change is that PRs arrive carrying tests, with a red-to-green receipt in the evidence block.
