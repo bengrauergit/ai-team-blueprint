@@ -109,3 +109,7 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 - **Acceptance criteria become executable checks in the same slice.** A criterion that cannot be encoded as a check is a grooming defect, not a testing gap; send it back to grooming. No new framework is required: lightweight check scripts and golden files are a fine harness, and the CI you already run picks new checks up automatically.
 
 - **Zero ceremony for the owner.** The human writes acceptance criteria once (the grooming gate already requires that); the agents do the red-green-refactor. The only visible change is that PRs arrive carrying tests, with a red-to-green receipt in the evidence block.
+
+## Loops close and loops exit
+
+- **A loop that does not return signal to its own start is a queue in disguise.** Before adding one, name what comes back around and who reads it. Every loop carries a bounded exit: a pass cap with honest escalation, a collection window with a decision date, or an event trigger that fires rarely by design. Full taxonomy: `loops.md`.

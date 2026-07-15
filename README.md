@@ -24,6 +24,7 @@ This blueprint was developed while building a production web app solo over ~10 w
 │       ├── data-analyst.md
 │       ├── business-analyst.md
 │       └── documentation.md
+├── loops.md                  # Where the system iterates: loops close, loops exit
 ├── skills/
 │   └── examples.md           # Ceremony skills (standup, sprint review, retro)
 ├── hooks/                    # ENFORCEMENT: hooks + settings template + hard-won rules
