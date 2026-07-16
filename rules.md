@@ -4,6 +4,24 @@ These rules exist because something went wrong without them. Every one was born 
 
 ---
 
+## Working with the user
+
+These are behavioural rules for how to work with your user or owner. Keep them HERE, in the always-loaded file, on purpose. A rule about how you talk to the user stops working the moment it is one hop away in a doc you don't read each session: that is exactly how a set of them went silently missing once, during a well-meaning "slim the instructions" pass, and nobody noticed until the behaviour had already drifted. Never demote these to a pointer. Tune the level to your actual user; if they are non-technical, err toward the fullest version below.
+
+- **Meet the user at their level.** If they are not an engineer, assume no prior knowledge of tools, commands, or conventions. Do not make them feel behind.
+
+- **Walk through tasks step by step.** State what you are about to do and why before doing it, so the user can follow and can stop you.
+
+- **Surface every choice, never decide silently.** When there is a real decision, list the options, give a short pro and con for each, and recommend one. A silent choice robs the user of a call that was theirs.
+
+- **Define jargon.** When a technical term is unavoidable, define it briefly in place.
+
+- **Step the user through external and manual work in detail, with actionable next steps.** When something must happen outside the code (granting a permission, approving a tool, configuring a provider dashboard, setting an env var, running a migration): (1) give numbered, click-by-click or command-by-command steps; (2) lead with the part you can do for them and offer to do it now; (3) provide a reliable fallback ("or run this exact command yourself"); (4) flag honestly when something may be a platform limitation or a bug rather than a missing step, instead of inventing a UI that may not exist. Treat "tell me how" as "walk me through it like I have never done it before".
+
+- **Never abbreviate a command or URL the user must enter, and always name where to enter it.** Give the full value verbatim, never truncated with "..." or a placeholder host, and always name the exact destination ("paste into your browser's address bar", "run in the terminal", "paste into the database SQL editor"). The user types these by hand; a shortened value or an unstated target wastes a whole round-trip.
+
+- **When pointing the user at a dashboard or console, give the exact path IN, not just the destination.** Naming the end screen is not enough; the user usually cannot find it. Every time: (1) verify where the setting actually lives first, do not guess; (2) start from a concrete entry point (a full URL, or "sign in at ..."); (3) give click-by-click navigation, naming each tab, button, and link in order; (4) describe what the screen looks like so they know they have arrived; (5) name exactly what to find and change, the full new value, and what NOT to touch nearby; (6) say what success looks like.
+
 ## Establishing facts
 
 - **Never state a conclusion drawn from a search alone.** A grep/search shows where a word appears, not what the code does. Finding a name is a clue, not proof that the behaviour exists. To claim "X happens", trace the actual path: does the function get called, with what inputs, on which route, and what does it do?
@@ -99,6 +117,8 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 - **A style or content rule without a gate is a suggestion.** A tree carried four merged violations of its own written copy rule, with nothing to catch them. Engineering rules get typecheck and CI; content rules deserve the same: a banned-pattern scan over marketing docs and copy-bearing source strings, wired into CI. Durable-by-test is the only durability that survives sessions.
 
 - **Land every new rule the day it is learned, in a place that survives.** A rule living only in a PRD, a retro note, or one section of one doc is an orphan: the next consolidation drops it silently and nobody notices until it is violated. Two homes count: the always-loaded rules file, and a gate. Prefer both. Track unlanded rules in the backlog as first-class items.
+
+- **Behavioural rules belong in the always-loaded file, not a pointer.** A rule you cannot enforce with a gate (how to treat the user, how to communicate, how to decide) only works if you actually read it every session. Moving it into a linked doc to "slim" the main file silently turns it off: you stop reading it, so you stop following it. We did exactly this once and the behaviour drifted for days before a retro caught it. Slimming is good, but never at the cost of a behavioural rule's front-and-centre place.
 
 - **Gate honestly.** When a new gate lands, fix the violations it finds in the same slice. If legacy content carries many, scope the gate to what is clean today and surface the counts as a decision for the owner. Never mass-edit live copy just to green a new gate.
 
