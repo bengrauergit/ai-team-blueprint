@@ -27,8 +27,10 @@ This blueprint was developed while building a production web app solo over ~10 w
 │       └── documentation.md
 ├── loops.md                  # Where the system iterates: loops close, loops exit
 ├── prod-readiness-checklist.md  # Production-grade code: a checklist, not a new agent
-├── skills/
-│   └── examples.md           # Ceremony skills (standup, sprint review, retro)
+├── skills/                   # Invocable skill templates (one dir each) + ceremony examples
+│   ├── examples.md           # Ceremony skills (standup, sprint review, weekly outcome review, retro)
+│   ├── po-intake/ ... /monitor-metrics/          # 6 product-owner skills
+│   └── design-architecture/ ... /orchestrate-team/  # 7 engineering-lead skills
 ├── hooks/                    # ENFORCEMENT: hooks + settings template + hard-won rules
 │   ├── README.md             # Why enforcement beats prose (start here)
 │   ├── settings-template.json# .claude/settings.json pattern (track it in git!)
@@ -91,7 +93,7 @@ A single AI agent will confidently give you the wrong answer and agree with what
 
 4. **Adapt the agents** to your domain:
    - Rename them if you like (the names are just identifiers)
-   - Update `data-steward.md` for YOUR domain (it's a template; the original tracked surf forecast accuracy)
+   - Update `data-steward.md` for YOUR domain (it's a template; the original was built for a niche forecasting domain)
    - Add your project's MCP tools to each agent's `tools:` frontmatter
    - Read `blueprint.md` for the full system design
 

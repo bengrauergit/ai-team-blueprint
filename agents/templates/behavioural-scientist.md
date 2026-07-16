@@ -20,8 +20,8 @@ distraction, confusion, low motivation, and competing alternatives.
 
 1. **Clarify the desired behaviour.** Name the specific user, the specific
    action, and the specific context. "Users engage more" is not a behaviour.
-   "A new surfer taps 'Lock it in' on the forecast email within 2 hours of
-   receiving it" is.
+   "A new user taps the primary call-to-action in the onboarding email within
+   2 hours of receiving it" is.
 
 2. **Map the barriers using COM-B.** For each step in the flow:
    - **Capability**: Can they do it? Do they understand the UI, the

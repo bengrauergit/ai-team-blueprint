@@ -37,7 +37,7 @@ Each agent template has comments showing what to customise:
 
 1. **builder.md** (the builder / engineering lead): Update the runtime map with YOUR specific runtimes and verification methods. Where does your code actually execute? What proves it's working there? Also adapt the "judgment skills" list to reference YOUR review, deploy, and retro tooling rather than reimplementing it.
 
-2. **data-steward.md**: This is a TEMPLATE. Replace the domain with yours (the original tracked surf forecast accuracy). If you don't have domain data to steward, skip this agent.
+2. **data-steward.md**: This is a TEMPLATE. Replace the domain with yours (the original was built for a niche forecasting domain). If you don't have domain data to steward, skip this agent.
 
 3. **All agents**: Add your project's MCP tools to each agent's `tools:` frontmatter if you use Supabase, Vercel, GitHub, or other connected services.
 

@@ -55,6 +55,23 @@ Run at the end of each working day. The standard is the last-hop rule: a story i
 Output: shipped with receipts / carried with reasons / measures read / the two ratios.
 ```
 
+## Weekly outcome review (the product owner leads)
+
+**File:** `.claude/skills/outcome-review/SKILL.md`
+
+```markdown
+# Weekly outcome review
+
+Run once a week. A one-day sprint reads "did it ship"; it cannot read "did it move the needle," which takes longer. This ceremony closes that gap, and it is the product owner's, not a repeat of the daily review.
+
+1. List the slices shipped in the last week that named an outcome metric (not just a done-signal).
+2. For each, pull the ACTUAL number for the outcome metric over the week (live query, not recall). Compare against the baseline and the success threshold that was set when the slice was planned.
+3. Verdict per slice: moved the needle / no movement / too early (name the date to re-read). A slice that shipped but never moved its metric is a learning, not a success.
+4. Feed the verdicts back into prioritisation: kill or pivot what is not working, double down on what is, and re-rank the backlog against the new evidence.
+
+Output: outcomes read against thresholds, and prioritisation adjusted on the evidence. This is the "reflect" half of the intake rhythm at a horizon the daily sprint cannot see.
+```
+
 ## Retro (event-driven, not ritual)
 
 **File:** `.claude/skills/retro/SKILL.md`

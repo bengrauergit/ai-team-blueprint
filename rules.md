@@ -88,6 +88,8 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 
 - **Advisors advise; the builder builds.** Only one agent writes code. Everyone else is read-only.
 
+- **Product input routes through the product owner first.** Ideas, complaints, requests, and "should we build this?" go to the product owner for framing and triage before anything is built. This rule belongs in your always-loaded file, not only in the agent's own file: a gatekeeper the main session forgets to route to is not a gatekeeper. The builder is the product owner's technical partner (how and what it costs), invoked early, not an order-taker.
+
 - **Rules born from mistakes are not suggestions.** When a rule seems overly cautious, it's because something went wrong without it. The cost of the rule is lower than the cost of the mistake it prevents.
 
 ## Enforcement & measurement (added 2026-07-14, from a red-team audit of the running system)

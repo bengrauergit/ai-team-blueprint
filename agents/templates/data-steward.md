@@ -15,7 +15,7 @@ model: haiku
 
 # ADAPT THIS AGENT TO YOUR DOMAIN
 #
-# This is a TEMPLATE. The original tracked surf forecast accuracy:
+# This is a TEMPLATE. The original was built for a niche forecasting domain:
 # fact-checking wave heights, wind speeds, and ideal conditions against
 # primary sources (buoy data, official forecasts, local reports).
 #
