@@ -8,6 +8,8 @@ A system for orchestrating a team of AI agents as a full delivery squad. Each ag
 
 There is no standing "orchestrator agent." Orchestration is your job. Agents are specialists you invoke one at a time for their specific lens.
 
+**One exception at the product layer:** the product owner is the single entry point for product work (ideas, complaints, requests, "should we build this?"). It triages every product input through its rigor, and coordinates specialist peers as a **hub**, spawning them as nested sub-agents, collecting their outputs, and synthesising. This is downward orchestration by one agent, not lateral peer-to-peer messaging: true peer teams are the platform's experimental agent-teams feature, off by default (see `docs/agents/agent-teams.md` if you adopt it). The main session still owns everything else.
+
 ## The default staffing rule
 
 **Default: you + the builder + at most ONE advisor.**
@@ -18,9 +20,10 @@ Multi-agent work (workflows, panels, parallel streams) is the exception, justifi
 
 | Role | Kind | Model tier | Writes? | One-line remit |
 |---|---|---|---|---|
-| **Builder** | Builder | Mid (Sonnet) | **Yes**: branch + PR, review-gated | The ONLY builder. Ships slices with evidence blocks; bounded build loops. |
+| **Product owner** | Advisor | High (Opus) | No | Gatekeeper for ALL product work: JTBD framing, evidence/discovery, scale-matched prioritisation, roadmap, ceremony cadence. Coordinates peers as a hub; commissions the red-teamer. |
+| **Builder / Engineering Lead** | Builder | High (Opus) | **Yes**: branch + PR, review-gated | The ONLY builder, and the PO's technical partner: owns architecture, the quality bar, trade-off transparency, incidents. Ships slices with evidence blocks; bounded build loops. |
 | **Red-teamer** | Advisor | High (Opus) | No | Adversarial review of plans, diagnoses, and major decisions before commitment. |
-| **Product owner** | Advisor | Mid (Sonnet) | No | Outcomes, measures of success, thinnest valuable slice, ruthless priority. |
+| **Reviewer** | Advisor | High (Opus) | No | Independent pre-merge review of a pushed diff (never its author) + codebase-health sweeps. Runs the prod-readiness checklist on new jobs/senders/endpoints. |
 | **Business analyst** | Advisor | Mid (Sonnet) | No | Grooms fuzzy asks into build-ready user stories with acceptance criteria. |
 | **Behavioural scientist** | Advisor | High (Opus) | No | Why humans stall; barriers and friction; ranked interventions. |
 | **Growth hacker** | Advisor | Mid (Sonnet) | No | New-user acquisition/activation, Day 0–2, smallest experiments. |
@@ -54,11 +57,11 @@ These survive every version of the blueprint. They are not optional.
 ## Model tiers and escalation
 
 Default tiers:
-- **Opus**: red-teamer, behavioural scientist, security (deep reasoning, adversarial work)
-- **Sonnet**: builder, product owner, growth hacker, designer, data analyst, business analyst (everyday work)
+- **Opus**: product owner, builder / engineering lead, red-teamer, reviewer, behavioural scientist, security (deep reasoning, adversarial and gatekeeping work). The product owner and builder were promoted from Sonnet when their remit expanded to gatekeeper and engineering lead.
+- **Sonnet**: growth hacker, designer, data analyst, business analyst (everyday work)
 - **Haiku**: data steward, tester, documentation (narrow, well-scoped tasks)
 
-**Escalation is a posture, not a rarity.** The per-invocation `model` param overrides the default. Architecture-heavy builds should spawn the builder on Opus. Full multi-source audits should spawn the data steward on Opus. An agent can't switch models mid-task. It names the need and you re-spawn it.
+**Escalation is a posture, not a rarity.** The per-invocation `model` param overrides the default in either direction: spawn a full multi-source audit on Opus, or down-tier the builder to Sonnet for a purely mechanical slice. An agent can't switch models mid-task. It names the need and you re-spawn it.
 
 **Extended thinking vs model tier:** The reasoning depth knob is the `effort` frontmatter field (low → max), orthogonal to model tier. Set `effort` when an agent needs deeper reasoning without changing model.
 
@@ -79,14 +82,16 @@ Every "done" carries an **evidence block**: what changed → runtime verified on
 
 ## Ceremonies (skills the main session runs)
 
+The product owner owns the cadence (ensures they happen and serve strategy); the main session runs them. Two a day, not four.
+
 | Ceremony | Cadence | What happens |
 |---|---|---|
-| `/standup` | Start of each session | Shipped / next / blocked, built from repo state |
-| `/sprint-planning` | Each morning | Pick the thin slice, groom it build-ready, agree the measure |
-| `/sprint-review` | End of each day | What shipped, receipts, measures read against real numbers |
-| `/retro` | After a process learning | What worked, what didn't, land the learning in the repo |
+| `/standup` | Start of each session | Shipped / next / blocked from repo state, AND plan the day (sprint-planning is merged in; grooming is a gate inside it) |
+| `/sprint-review` | End of each day | What shipped, receipts, measures read, plus two workflow-health ratios (sprint-goal hit rate, process-vs-product split) |
+| Weekly outcome review | Once a week | The product owner reads whether recent slices moved their outcome metrics, the read a one-day sprint cannot give |
+| `/retro` | After a process learning | What worked, what didn't, land the learning in a durable home, ideally a gate |
 
-A sprint is one working day. Plan in the morning, review at day's end. Retro stays judgement-based: after a day with a real learning, not ritually every evening.
+A sprint is one working day. Plan in the morning, review at day's end. Retro stays judgement-based: after a day with a real learning, not ritually every evening. The weekly outcome review exists because a one-day sprint reads "shipped" but not "moved the needle," which takes longer.
 
 ## Orchestration: when multi-agent work IS justified
 
@@ -111,8 +116,9 @@ File-based, repo-committed memory is a deliberate choice: entries are git-review
 
 | Agent | File access | Web search | Prod data (read) | Browser | Writes |
 |---|---|---|---|---|---|
-| Builder | read + write | yes | yes | yes | code (branch + PR) |
-| Red-teamer, Product owner | read | yes | yes | no | none |
+| Builder / Engineering Lead | read + write | yes | yes | yes | code (branch + PR) |
+| Product owner | read | yes | yes | no | none |
+| Red-teamer, Reviewer | read | yes | yes | no | none |
 | Behavioural scientist, Growth | read | yes | yes | no | none |
 | Designer | read | yes | no | yes (screenshots) | none |
 | Tester | read | no | no | yes (runs flows) | none |

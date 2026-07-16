@@ -12,10 +12,10 @@ This blueprint was developed while building a production web app solo over ~10 w
 ├── sop.md                    # One-page standard operating procedure
 ├── agents/
 │   └── templates/            # Ready-to-use agent definitions
-│       ├── builder.md        # The engineer: the only one who writes code
+│       ├── builder.md        # Builder + Engineering Lead: the only one who writes code, owns quality + trade-offs
 │       ├── red-teamer.md     # The devil's advocate, kills bad ideas
 │       ├── reviewer.md       # Independent pre-merge review + codebase-health sweeps
-│       ├── product-owner.md  # Outcomes, priorities, thinnest valuable slice
+│       ├── product-owner.md  # Gatekeeper for all product work: JTBD, evidence, prioritisation, the hub
 │       ├── behavioural-scientist.md
 │       ├── growth-hacker.md
 │       ├── data-steward.md   # Domain data quality (adapt to your domain)
@@ -49,7 +49,7 @@ Stop using "an AI." Orchestrate a **bench of AIs**: each with a narrow job, real
 
 The system has four layers:
 
-1. **Agents**: specialist roles with defined responsibilities, tools, and constraints. One builder (writes code). Many advisors (read-only). One red-teamer whose only job is to prove the plan wrong.
+1. **Agents**: specialist roles with defined responsibilities, tools, and constraints. One builder / engineering lead (writes code, owns technical health). Many advisors (read-only). One red-teamer whose only job is to prove the plan wrong. Two agents sit at the centre: the **product owner** is the single entry point for product work (what and whether), and the **builder** is its technical partner (how and what it costs).
 
 2. **Rules**: operating principles born from real mistakes. "Nothing is done without a receipt from production." "Never state a conclusion from a search alone." These prevent the failure modes that burn days.
 
@@ -64,8 +64,8 @@ AI amplifies good process and ruthlessly exposes bad process.
 A single AI agent will confidently give you the wrong answer and agree with whatever you already think. The fix isn't a better model. It's a better system:
 
 - A **red-teamer** that challenges every significant decision before you commit
-- A **product owner** that cuts scope to the thinnest valuable slice
-- A **builder** that must prove every "it works" claim with evidence from the real runtime
+- A **product owner** that gatekeeps every product ask through evidence, framing, and ruthless prioritisation
+- A **builder / engineering lead** that must prove every "it works" claim with evidence from the real runtime, and surfaces the technical trade-offs out loud
 - **Rules** that force honesty: label every claim MEASURED-FACT or INFERENCE
 
 ## Quick start (Claude Code)

@@ -22,9 +22,10 @@ The working rhythm under the agent-system blueprint. This is the quick card; `bl
 
 | Question sounds like… | Ask |
 |---|---|
-| Build / fix / debug it | **builder** (the only hands) |
+| ANY product input (idea, complaint, request, "should we build this?") | **product owner** (the gatekeeper: all product work routes here first) |
+| Build / fix / debug it, or "what's the right architecture / what does it cost" | **builder / engineering lead** (the only hands) |
 | Is this plan/claim actually true? | **red-teamer** |
-| Is this worth building, and what's the smallest version? | **product owner** |
+| Independent code review of a pushed diff before merge | **reviewer** (never the diff's author) |
 | Why do users stall here? | **behavioural scientist** |
 | How do we get the next new user to value? | **growth hacker** |
 | Is the domain data right? | **data steward** |
@@ -35,12 +36,18 @@ The working rhythm under the agent-system blueprint. This is the quick card; `bl
 | Write it down durably | **documentation** |
 | Turn a fuzzy ask into stories / a PRD | **business analyst** |
 
-## Ceremonies (skills, run by the main session)
+## Ceremonies (skills, run by the main session; the product owner owns cadence)
 
-- **`/standup`**: every session start. No advisors; it's a sync, not analysis.
-- **`/sprint-planning`**: each morning after standup.
-- **`/sprint-review`**: end of each day (what shipped, receipts, measures read).
-- **`/retro`**: when a day taught us something about process, landed in the repo.
+Two a day, not four (measured: four was overhead a solo owner never amortized).
+
+- **`/standup`**: every session start. The sync (shipped / next / blocked) AND
+  planning the day, merged. Grooming is a gate inside it, not a separate ceremony.
+- **`/sprint-review`**: end of each day (what shipped, receipts, measures read,
+  plus two workflow-health ratios: sprint-goal hit rate, process-vs-product split).
+- **Weekly outcome review**: the product owner reads whether recent slices
+  actually moved their outcome metrics, the read a one-day sprint cannot give.
+- **`/retro`**: event-driven, only when a day taught a real process lesson. Land
+  it in a durable home, ideally a gate.
 
 ## Rules that never bend
 

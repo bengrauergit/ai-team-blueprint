@@ -35,7 +35,7 @@ cp agents/templates/product-owner.md .claude/agents/
 
 Each agent template has comments showing what to customise:
 
-1. **builder.md**: Update the runtime map with YOUR specific runtimes and verification methods. Where does your code actually execute? What proves it's working there?
+1. **builder.md** (the builder / engineering lead): Update the runtime map with YOUR specific runtimes and verification methods. Where does your code actually execute? What proves it's working there? Also adapt the "judgment skills" list to reference YOUR review, deploy, and retro tooling rather than reimplementing it.
 
 2. **data-steward.md**: This is a TEMPLATE. Replace the domain with yours (the original tracked surf forecast accuracy). If you don't have domain data to steward, skip this agent.
 
@@ -122,15 +122,15 @@ tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, mcp__Supabase__execute_sql, 
 ### Changing model tiers
 
 Each agent has a `model:` field in its frontmatter. The defaults:
-- `opus`: for agents that need deep reasoning (red-teamer, security, behavioural scientist)
-- `sonnet`: for everyday work (builder, product owner, growth, designer, analysts)
+- `opus`: for the gatekeeping, building, and adversarial roles (product owner, builder / engineering lead, red-teamer, reviewer, security, behavioural scientist)
+- `sonnet`: for everyday work (growth, designer, data analyst, business analyst)
 - `haiku`: for narrow, well-scoped tasks (tester, documentation, data steward)
 
-Override per-invocation when needed: spawn the builder on Opus for architecture-heavy work.
+Override per-invocation when needed, in either direction: down-tier the builder to Sonnet for a purely mechanical slice, or spawn a heavy audit on Opus.
 
 ### Adding ceremony skills
 
-The blueprint references `/standup`, `/sprint-planning`, `/sprint-review`, and `/retro` skills. These are custom skills you can create in `.claude/skills/`:
+The blueprint uses two ceremonies a day, not four: `/standup` (the morning sync AND planning the day, merged) and `/sprint-review` (the evening close), plus a weekly outcome review the product owner leads, and `/retro` fired only after a real process lesson. These are custom skills you can create in `.claude/skills/`:
 
 ```bash
 mkdir -p .claude/skills/standup
