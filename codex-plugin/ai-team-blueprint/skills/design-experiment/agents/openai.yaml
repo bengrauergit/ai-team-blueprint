@@ -1,0 +1,4 @@
+interface:
+  display_name: "design experiment"
+  short_description: "Run the design experiment workflow"
+  default_prompt: "Use $design-experiment for this task."

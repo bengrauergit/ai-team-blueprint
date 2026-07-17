@@ -1,0 +1,4 @@
+interface:
+  display_name: "monitor metrics"
+  short_description: "Run the monitor metrics workflow"
+  default_prompt: "Use $monitor-metrics for this task."

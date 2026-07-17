@@ -1,0 +1,4 @@
+interface:
+  display_name: "run sprint review"
+  short_description: "Run the run sprint review workflow"
+  default_prompt: "Use $run-sprint-review for this task."

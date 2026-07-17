@@ -1,0 +1,4 @@
+interface:
+  display_name: "run standup"
+  short_description: "Run the run standup workflow"
+  default_prompt: "Use $run-standup for this task."

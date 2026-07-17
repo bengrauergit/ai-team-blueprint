@@ -1,0 +1,4 @@
+interface:
+  display_name: "plan deployment"
+  short_description: "Run the plan deployment workflow"
+  default_prompt: "Use $plan-deployment for this task."

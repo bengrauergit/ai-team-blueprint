@@ -1,0 +1,27 @@
+{
+  "name": "ai-team-blueprint",
+  "version": "0.1.0",
+  "description": "Codex skills and enforcement hooks for running a disciplined AI software delivery team.",
+  "author": {
+    "name": "Ben Grauer",
+    "url": "https://github.com/bengrauergit"
+  },
+  "homepage": "https://github.com/bengrauergit/ai-team-blueprint",
+  "repository": "https://github.com/bengrauergit/ai-team-blueprint",
+  "license": "MIT",
+  "keywords": ["codex", "agents", "delivery", "product", "software-engineering"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Team Blueprint",
+    "shortDescription": "Run a disciplined AI delivery squad in Codex.",
+    "longDescription": "Adds product intake, planning, architecture, delivery, review, learning, and bounded build-loop skills, plus optional lifecycle enforcement hooks.",
+    "developerName": "Ben Grauer",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "defaultPrompt": [
+      "Run standup and choose today's thinnest valuable slice.",
+      "Route this product idea through the product-owner intake gate.",
+      "Run the bounded builder and tester loop for this story."
+    ]
+  }
+}

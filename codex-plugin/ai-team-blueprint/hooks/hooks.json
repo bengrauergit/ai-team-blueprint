@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$PLUGIN_ROOT/scripts/pre-commit-check.sh\"",
+            "timeout": 180,
+            "statusMessage": "Checking the commit gate"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$PLUGIN_ROOT/scripts/subagent-log.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

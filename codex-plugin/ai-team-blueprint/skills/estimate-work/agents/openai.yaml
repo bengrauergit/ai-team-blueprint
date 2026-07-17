@@ -1,0 +1,4 @@
+interface:
+  display_name: "estimate work"
+  short_description: "Run the estimate work workflow"
+  default_prompt: "Use $estimate-work for this task."

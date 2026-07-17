@@ -1,0 +1,4 @@
+interface:
+  display_name: "orchestrate team"
+  short_description: "Run the orchestrate team workflow"
+  default_prompt: "Use $orchestrate-team for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "run retro"
+  short_description: "Run the run retro workflow"
+  default_prompt: "Use $run-retro for this task."

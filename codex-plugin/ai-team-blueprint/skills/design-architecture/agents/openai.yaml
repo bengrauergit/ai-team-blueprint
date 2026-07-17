@@ -1,0 +1,4 @@
+interface:
+  display_name: "design architecture"
+  short_description: "Run the design architecture workflow"
+  default_prompt: "Use $design-architecture for this task."
