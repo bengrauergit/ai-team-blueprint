@@ -103,6 +103,25 @@ A single AI agent will confidently give you the wrong answer and agree with what
    - Before merging → run the code-review and security-review skills
    - Default team: you + the builder + at most one advisor
 
+## Quick start (Codex)
+
+The Codex-native solution lives in two parts:
+
+- `codex/project-template/`: `AGENTS.md`, custom agents, project context,
+  backlog, Git hooks, and CI templates to copy into a project.
+- `codex-plugin/ai-team-blueprint/`: installable skills and Codex lifecycle
+  hooks, including the bounded builder-to-tester loop.
+
+Install the project template without overwriting existing guidance:
+
+```bash
+sh codex/install.sh /absolute/path/to/your/project
+```
+
+Then adapt the context, fast check, CI commands, and domain data steward before
+using the team. See [`docs/codex-setup-guide.md`](docs/codex-setup-guide.md) for
+the complete walkthrough and Codex-specific trade-offs.
+
 ## What makes this different from "just use AI"
 
 | Without the blueprint | With the blueprint |

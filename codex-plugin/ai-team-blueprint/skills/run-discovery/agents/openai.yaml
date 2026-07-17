@@ -1,0 +1,4 @@
+interface:
+  display_name: "run discovery"
+  short_description: "Run the run discovery workflow"
+  default_prompt: "Use $run-discovery for this task."

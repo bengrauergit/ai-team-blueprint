@@ -1,0 +1,61 @@
+name: CI
+
+# The mechanical half of the review gate: every PR must pass the REAL build
+# (your production bundler, not a faster proxy, ours diverged) plus your
+# repo's own golden gates. ADAPT the four check steps to your stack.
+#
+# Three policies that keep this gate honest (each learned the hard way):
+#
+# 1. KNOW WHAT CI CAN ENFORCE. Without branch protection (unavailable on
+#    free private repos), CI is ADVISORY: the human clicking merge is the
+#    real gate. Document that honestly rather than claiming enforcement.
+#
+# 2. INHERITED RED vs NEW RED. If a check is already failing on the base
+#    branch, isolate it in its OWN job marked continue-on-error, loudly
+#    labelled, with an owner and an end date, so the blocking job's red is
+#    always NEW red. "It was already broken" must be a receipt (the check
+#    fails on the merge-base SHA too), never a vibe someone argues.
+#
+# 3. NEVER weaken a step to get green (quietly-added continue-on-error,
+#    deleted assertions, narrowed test globs). A check that has ever passed
+#    while the thing it guards was broken is a P1: fix or delete it same-day.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit          # ADAPT
+
+      - name: Build (the real bundler)
+        run: npm run build             # ADAPT: must be the production build path
+
+      - name: Golden gates
+        run: npm test                  # ADAPT: your snapshot/golden checks
+
+      # Optional: a content/style gate. A written house-style rule (banned
+      # punctuation, words, phrasing) with no gate WILL be violated in-tree;
+      # scan marketing docs and copy-bearing source strings for your banned
+      # patterns and fail on hits.
+      # Real example: this repo runs exactly this gate (see .github/workflows/copy-style.yml)
+      # - name: Copy style check
+      #   run: sh scripts/copy-style-check.sh
+
+      # CI runs on a runner, not your laptop: environment-dependent checks
+      # (fonts, timezones, native binaries) may pass locally and fail here.
+      # That divergence is SIGNAL: the runner is closer to prod than your laptop.

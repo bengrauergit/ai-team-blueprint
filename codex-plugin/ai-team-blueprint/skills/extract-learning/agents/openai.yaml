@@ -1,0 +1,4 @@
+interface:
+  display_name: "extract learning"
+  short_description: "Run the extract learning workflow"
+  default_prompt: "Use $extract-learning for this task."

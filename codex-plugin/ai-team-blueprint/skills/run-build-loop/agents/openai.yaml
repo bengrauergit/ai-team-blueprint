@@ -1,0 +1,4 @@
+interface:
+  display_name: "run build loop"
+  short_description: "Run the run build loop workflow"
+  default_prompt: "Use $run-build-loop for this task."

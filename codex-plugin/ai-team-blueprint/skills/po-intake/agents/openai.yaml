@@ -1,0 +1,4 @@
+interface:
+  display_name: "po intake"
+  short_description: "Run the po intake workflow"
+  default_prompt: "Use $po-intake for this task."

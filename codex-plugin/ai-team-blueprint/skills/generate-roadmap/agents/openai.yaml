@@ -1,0 +1,4 @@
+interface:
+  display_name: "generate roadmap"
+  short_description: "Run the generate roadmap workflow"
+  default_prompt: "Use $generate-roadmap for this task."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "escalate risk"
+  short_description: "Run the escalate risk workflow"
+  default_prompt: "Use $escalate-risk for this task."

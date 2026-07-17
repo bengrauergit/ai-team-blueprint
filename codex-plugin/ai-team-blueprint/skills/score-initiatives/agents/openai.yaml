@@ -1,0 +1,4 @@
+interface:
+  display_name: "score initiatives"
+  short_description: "Run the score initiatives workflow"
+  default_prompt: "Use $score-initiatives for this task."

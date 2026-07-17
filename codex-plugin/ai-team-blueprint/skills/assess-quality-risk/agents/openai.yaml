@@ -1,0 +1,4 @@
+interface:
+  display_name: "assess quality risk"
+  short_description: "Run the assess quality risk workflow"
+  default_prompt: "Use $assess-quality-risk for this task."
