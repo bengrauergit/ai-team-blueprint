@@ -37,6 +37,12 @@ This blueprint was developed while building and shipping a production web app so
 │   ├── pre-commit-check.sh   # Blocks `git commit` when your fast gate fails
 │   ├── subagent-log.sh       # Measures which agent seats earn their place
 │   └── pre-push              # Blocks direct pushes to main
+├── routines/                 # The ceremonies, anchored to a clock not a memory
+│   ├── README.md             # Hooks block the wrong thing; routines trigger the right one
+│   ├── morning-brief.md      # Shipped / awaiting you / next / blocked, before your first session
+│   ├── eod-review-nudge.md   # Closing the day costs one confirmation, not one decision
+│   ├── evening-observer.md   # Reviews the PROCESS while it runs; improves the other routines
+│   └── weekly-outcome-review.md # Did the slices we shipped actually move anything?
 ├── ci/
 │   └── ci.yml                # CI gate template + the honesty policies that keep it real
 ├── scripts/
@@ -62,9 +68,9 @@ The system has four layers:
 
 2. **Rules**: operating principles born from real mistakes. "Nothing is done without a receipt from production." "Never state a conclusion from a search alone." These prevent the failure modes that burn days.
 
-3. **Ceremonies** are two lightweight rituals a day, not four: `/standup` (sync + plan the day, merged after we measured that separate standup/planning ceremonies were overhead a solo dev never amortized) and `/sprint-review` (what shipped, measures read against real numbers); `/retro` only when a day taught a real process lesson.
+3. **Ceremonies** are two lightweight rituals a day, not four: `/standup` (sync + plan the day, merged after we measured that separate standup/planning ceremonies were overhead a solo dev never amortized) and `/sprint-review` (what shipped, measures read against real numbers); `/retro` only when a day taught a real process lesson. Anchor them to a clock, not a memory (see `routines/`): we measured a standup running at 17:10 and reviews being skipped outright, both because they depended on someone remembering.
 
-4. **Enforcement**: hooks, CI, and source-level permissions for every rule that must never slip (see `hooks/README.md`). Prose rules drift; shell scripts don't. And measurement: the system logs its own agent usage and reads two workflow ratios (sprint-goal hit rate, process-vs-product commit share) so process growth stays visible and evidence-based.
+4. **Enforcement**: hooks, CI, and source-level permissions for every rule that must never slip (see `hooks/README.md`). Prose rules drift; shell scripts don't. Enforcement runs in two directions: hooks BLOCK the wrong action, scheduled routines TRIGGER the right one. And measurement: the system logs its own agent usage and reads two workflow ratios (sprint-goal hit rate, process-vs-product commit share) so process growth stays visible and evidence-based.
 
 ## The key insight
 

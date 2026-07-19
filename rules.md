@@ -96,7 +96,9 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 
 - **A rule that must never slip does not belong in prose.** Put it in a hook, a CI step, or a database permission. An audit found our two hardest written rules ("never push to main", "migrations need sign-off") silently unenforced for weeks. The prose said one thing, the machine did another.
 
-- **Verify every guardrail actually fires: run the failure case.** A guardrail you believe is on but isn't is worse than none. Test the hook with a dry-run push; probe the read-only connector with a write and watch the database refuse it. No receipt, no guardrail.
+- **Verify every guardrail actually fires: run the failure case.** A guardrail you believe is on but isn't is worse than none. Test the hook with a dry-run push; probe the read-only connector with a write and watch the database refuse it. No receipt, no guardrail. The same applies to scheduled routines: read the LAST RUN TIME, not the config. We found a weekly review that was scheduled, enabled, and had never fired once, and nobody noticed, because a routine that never runs is silent in exactly the same way as a routine with nothing to report.
+
+- **A ceremony anchored to memory does not happen.** The same logic that moves a rule out of prose and into a hook moves a ceremony out of memory and onto a clock. Measured: a standup that ran at 17:10 (a ritual for planning the day, firing after it), and end-of-day reviews skipped entirely, so slices shipped with nobody reading whether their measure moved. Enforcement runs both directions: hooks BLOCK the wrong action, scheduled routines TRIGGER the right one. See `routines/`.
 
 - **Know what your CI can and cannot enforce.** On plans without branch protection, CI is advisory: the human clicking merge is the real gate. Say so in your docs instead of claiming enforcement you don't have.
 
