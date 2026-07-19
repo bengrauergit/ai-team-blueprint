@@ -2,7 +2,7 @@
 
 A complete system for orchestrating a team of AI agents to build software like a full delivery squad. Solo.
 
-This blueprint was developed while building a production web app solo over ~10 weeks: 300+ shipped pull requests, tens of thousands of lines of production code, one person. The speed came not from the AI itself, but from the system around it: the roles, the rules, the ceremonies, and the adversarial checks that stop bad ideas before they ship.
+This blueprint was developed while building and shipping a production web app solo: 490+ merged pull requests, one person. The speed came not from the AI itself, but from the system around it: the roles, the rules, the ceremonies, and the adversarial checks that stop bad ideas before they ship.
 
 ## What's in here
 
@@ -39,10 +39,17 @@ This blueprint was developed while building a production web app solo over ~10 w
 │   └── pre-push              # Blocks direct pushes to main
 ├── ci/
 │   └── ci.yml                # CI gate template + the honesty policies that keep it real
+├── scripts/
+│   └── copy-style-check.sh   # Content-rule gate: a style rule without a gate is a suggestion
 ├── workflows/
 │   └── build-loop.js         # Registered build→independent-UAT loop, 5-pass cap
+├── codex/                    # CODEX USERS START HERE
+│   ├── install.sh            # One-command install into your project
+│   └── project-template/     # The blueprint, laid out the Codex-native way
+├── codex-plugin/             # The blueprint packaged as a Codex plugin
 └── docs/
-    └── setup-guide.md        # Step-by-step setup for Claude Code
+    ├── setup-guide.md        # Step-by-step setup for Claude Code
+    └── codex-setup-guide.md  # Step-by-step setup for Codex
 ```
 
 ## The core idea
@@ -75,7 +82,7 @@ A single AI agent will confidently give you the wrong answer and agree with what
 1. **Clone this repo** into your project or copy the files you need:
 
    ```bash
-   git clone https://github.com/[your-username]/ai-team-blueprint.git
+   git clone https://github.com/bengrauergit/ai-team-blueprint.git
    ```
 
 2. **Copy agent templates** into your project's `.claude/agents/` directory:

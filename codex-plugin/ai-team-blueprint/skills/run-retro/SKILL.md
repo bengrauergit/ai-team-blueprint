@@ -1,6 +1,6 @@
 ---
 name: run-retro
-description: Extract and land a durable process improvement after a real delivery lesson, failure, or repeated correction. Use for retrospectives after incidents, repeated agent mistakes, broken guardrails, or meaningful process discoveries—not as a calendar ritual.
+description: Extract and land a durable process improvement after a real delivery lesson, failure, or repeated correction. Use for retrospectives after incidents, repeated agent mistakes, broken guardrails, or meaningful process discoveries, not as a calendar ritual.
 ---
 
 # Run Retro
