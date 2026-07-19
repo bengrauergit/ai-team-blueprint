@@ -70,8 +70,22 @@ that fires rarely needs to be **cheap to miss and easy to retry**, not merely
 scheduled and hoped for.
 
 **The fix, using a pattern already in this directory:** schedule it DAILY and
-make step 0 a guard: "has this week's outcome review already run? If yes, say
-so in one line and STOP." Seven chances a week instead of one, idempotent by
-construction, and silent on the six days it has nothing to do. That is exactly
-the shape `eod-review-nudge.md` uses, and it is the right shape for anything
-that must happen once per period rather than at one exact instant.
+put a guard at step 0, so the schedule provides the chances and the guard
+provides the discipline. Two conditions, both required to proceed:
+
+1. **Not already done.** No review recorded in the last 6 days. Check the
+   backlog file on the main branch AND open PRs, because a routine that opens a
+   PR rather than pushing will not show up on main the next morning.
+2. **Not too late to be useful.** Only proceed on the intended day or the few
+   days after it (Friday through Monday, in the original). A review of last
+   week written on a Wednesday is stale, and the next Friday is close enough to
+   wait for.
+
+That is four chances instead of one, idempotent by construction, and silent on
+the days it has nothing to do. It is the same shape `eod-review-nudge.md` uses,
+and it is the right shape for anything that must happen once per period rather
+than at one exact instant.
+
+The second condition matters as much as the first. Without it, "catch up a
+miss" quietly becomes "run whenever", and a ceremony that fires on an arbitrary
+day is one nobody trusts the cadence of.
