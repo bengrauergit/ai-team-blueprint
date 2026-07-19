@@ -2,7 +2,7 @@
 
 A complete system for orchestrating a team of AI agents to build software like a full delivery squad. Solo.
 
-This blueprint was developed while building a production web app solo over ~10 weeks: 300+ shipped pull requests, tens of thousands of lines of production code, one person. The speed came not from the AI itself, but from the system around it: the roles, the rules, the ceremonies, and the adversarial checks that stop bad ideas before they ship.
+This blueprint was developed while building and shipping a production web app solo: 490+ merged pull requests, one person. The speed came not from the AI itself, but from the system around it: the roles, the rules, the ceremonies, and the adversarial checks that stop bad ideas before they ship.
 
 ## What's in here
 
@@ -37,12 +37,25 @@ This blueprint was developed while building a production web app solo over ~10 w
 │   ├── pre-commit-check.sh   # Blocks `git commit` when your fast gate fails
 │   ├── subagent-log.sh       # Measures which agent seats earn their place
 │   └── pre-push              # Blocks direct pushes to main
+├── routines/                 # The ceremonies, anchored to a clock not a memory
+│   ├── README.md             # Hooks block the wrong thing; routines trigger the right one
+│   ├── morning-brief.md      # Shipped / awaiting you / next / blocked, before your first session
+│   ├── eod-review-nudge.md   # Closing the day costs one confirmation, not one decision
+│   ├── evening-observer.md   # Reviews the PROCESS while it runs; improves the other routines
+│   └── weekly-outcome-review.md # Did the slices we shipped actually move anything?
 ├── ci/
 │   └── ci.yml                # CI gate template + the honesty policies that keep it real
+├── scripts/
+│   └── copy-style-check.sh   # Content-rule gate: a style rule without a gate is a suggestion
 ├── workflows/
 │   └── build-loop.js         # Registered build→independent-UAT loop, 5-pass cap
+├── codex/                    # CODEX USERS START HERE
+│   ├── install.sh            # One-command install into your project
+│   └── project-template/     # The blueprint, laid out the Codex-native way
+├── codex-plugin/             # The blueprint packaged as a Codex plugin
 └── docs/
-    └── setup-guide.md        # Step-by-step setup for Claude Code
+    ├── setup-guide.md        # Step-by-step setup for Claude Code
+    └── codex-setup-guide.md  # Step-by-step setup for Codex
 ```
 
 ## The core idea
@@ -55,9 +68,9 @@ The system has four layers:
 
 2. **Rules**: operating principles born from real mistakes. "Nothing is done without a receipt from production." "Never state a conclusion from a search alone." These prevent the failure modes that burn days.
 
-3. **Ceremonies** are two lightweight rituals a day, not four: `/standup` (sync + plan the day, merged after we measured that separate standup/planning ceremonies were overhead a solo dev never amortized) and `/sprint-review` (what shipped, measures read against real numbers); `/retro` only when a day taught a real process lesson.
+3. **Ceremonies** are two lightweight rituals a day, not four: `/standup` (sync + plan the day, merged after we measured that separate standup/planning ceremonies were overhead a solo dev never amortized) and `/sprint-review` (what shipped, measures read against real numbers); `/retro` only when a day taught a real process lesson. Anchor them to a clock, not a memory (see `routines/`): we measured a standup running at 17:10 and reviews being skipped outright, both because they depended on someone remembering.
 
-4. **Enforcement**: hooks, CI, and source-level permissions for every rule that must never slip (see `hooks/README.md`). Prose rules drift; shell scripts don't. And measurement: the system logs its own agent usage and reads two workflow ratios (sprint-goal hit rate, process-vs-product commit share) so process growth stays visible and evidence-based.
+4. **Enforcement**: hooks, CI, and source-level permissions for every rule that must never slip (see `hooks/README.md`). Prose rules drift; shell scripts don't. Enforcement runs in two directions: hooks BLOCK the wrong action, scheduled routines TRIGGER the right one. And measurement: the system logs its own agent usage and reads two workflow ratios (sprint-goal hit rate, process-vs-product commit share) so process growth stays visible and evidence-based.
 
 ## The key insight
 
@@ -75,7 +88,7 @@ A single AI agent will confidently give you the wrong answer and agree with what
 1. **Clone this repo** into your project or copy the files you need:
 
    ```bash
-   git clone https://github.com/[your-username]/ai-team-blueprint.git
+   git clone https://github.com/bengrauergit/ai-team-blueprint.git
    ```
 
 2. **Copy agent templates** into your project's `.claude/agents/` directory:

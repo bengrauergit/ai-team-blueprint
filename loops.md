@@ -23,6 +23,7 @@ two rules govern every loop in this blueprint:
 | Build-verify (`workflows/build-loop.js`) | hours | tester's schema verdict | 5-pass cap, escalate with failures |
 | CI per PR | minutes | pass/fail on the diff | mechanical |
 | Daily ceremony (standup, work, review) | 1 day | measures read against real numbers; two workflow ratios | the day ends |
+| Observation (`routines/`, watching the system work) | 1 day / 1 week | a finding that changes a rule, a routine, or the backlog | silent when there is no real signal |
 | Roster measurement (usage log) | ~2 weeks | which agent seats earned their place | a named decision date |
 | Retro | event-driven | a rule lands in a durable home, ideally a gate | only fires on a real lesson |
 
@@ -40,6 +41,19 @@ two rules govern every loop in this blueprint:
 - **The growth loop**: share, arrive, sign up, share. Instrument every
   joint end-to-end BEFORE nudging it; an unmeasured growth loop is
   indistinguishable from noise.
+
+## What makes the daily loop actually fire
+
+A daily ceremony loop only closes if the ceremonies run, and memory-anchored
+ceremonies do not: we measured a standup firing at 17:10 (a planning ritual
+arriving after the day it was meant to plan) and end-of-day reviews being
+skipped outright. Clock-anchored routines (`routines/`) are what turn the daily
+loop from aspirational into real.
+
+The observation loop is the one that compounds. In the project this came from,
+the evening observer produced the finding that the standup was late; that
+finding created the morning brief and the end-of-day nudge. A routine observed
+the system, and the system changed. That is the test this file sets.
 
 ## Loops deliberately NOT built
 
