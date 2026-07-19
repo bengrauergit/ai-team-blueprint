@@ -53,10 +53,25 @@ Owned by the product owner, not the builder. This is a value question.
 The trap is a review that reports activity instead of outcomes: "shipped 6
 slices, 400 lines" tells you nothing about whether any of it mattered.
 
-The confession: in the project this came from, this routine was scheduled,
-enabled, and had **never once fired** by the time this file was written.
-Nobody noticed, because a routine that does not run is silent in exactly the
-same way as a routine with nothing to report.
+## Weekly routines are structurally fragile. Design around it.
 
-That is the argument for rule 1 in the routines README: check the last run
-time, not the config. Scheduling is not running.
+In the project this came from, this routine was scheduled and enabled, and had
+still never produced a single run. The diagnosis is worth more than the fact:
+
+It had been live for exactly one of its scheduled slots, and the machine was
+not running at that moment. The daily routines survived the same outage because
+the scheduler caught them up on next launch. The weekly one did not: its missed
+slot was two days back by then, and it simply rolled forward to next week.
+
+That is not bad luck, it is arithmetic. A daily routine gets 365 chances a year
+and self-heals, because a miss is at most a day old and tomorrow comes quickly.
+A weekly routine gets 52, and a single miss costs a whole cycle. Any routine
+that fires rarely needs to be **cheap to miss and easy to retry**, not merely
+scheduled and hoped for.
+
+**The fix, using a pattern already in this directory:** schedule it DAILY and
+make step 0 a guard: "has this week's outcome review already run? If yes, say
+so in one line and STOP." Seven chances a week instead of one, idempotent by
+construction, and silent on the six days it has nothing to do. That is exactly
+the shape `eod-review-nudge.md` uses, and it is the right shape for anything
+that must happen once per period rather than at one exact instant.

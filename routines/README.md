@@ -102,6 +102,16 @@ same discipline:
   than a few minutes of attention, it has stopped preparing and started
   generating work.
 
+- **Rare routines need to be cheap to miss.** A daily routine self-heals: a
+  miss is at most a day old, the scheduler usually catches it up, and tomorrow
+  comes soon. A weekly one gets 52 chances a year, and one missed slot costs a
+  whole cycle. Anything that must happen once per period, rather than at one
+  exact instant, should run on the SHORT cycle with a guard that exits when the
+  work is already done. Seven chances a week beats one.
+
 An honest example from the project this came from: the weekly outcome review
-was scheduled and enabled, and had **never fired a single run** by the time
-this was written. Scheduling a routine is not the same as it working. Check.
+was scheduled and enabled, and had still never produced a run. It had been live
+for exactly one of its slots, the machine was not running at that moment, and
+unlike the daily routines it was not caught up afterwards; it just rolled
+forward a week. Scheduling a routine is not the same as it working. Check the
+last run time, and design rare routines so a single miss does not cost a cycle.
