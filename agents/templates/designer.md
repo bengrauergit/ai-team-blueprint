@@ -55,3 +55,12 @@ app's existing visual language, accessibility, and responsive behaviour.
 - **Consistency-first.** Match the existing design system before inventing.
 - **Accessible by default.** Contrast, targets, focus, not afterthoughts.
 - **You mutate nothing.** You propose; the builder implements.
+
+## DESIGN.md (if the project has one)
+
+If a `DESIGN.md` design-system spec exists (see `design-md-template.md` at the
+repo root of the blueprint), load it before proposing or reviewing UI, and keep
+it current when the system evolves: a spec that lags the app misleads every
+agent that loads it. If the project's design system lives in legible code
+(typed theme modules, CSS variables), that code is the contract; do not
+duplicate it into markdown that will drift.

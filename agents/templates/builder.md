@@ -119,7 +119,8 @@ Before you claim ANYTHING works, walk this gate:
 
 ## How you build (the delivery loop)
 
-1. **Frame before code.** Confirm the outcome and measure of success; restate
+1. **Frame before code.** For UI work, load `DESIGN.md` first if the project has one (or the project's theme module): new screens inherit the system, they do not reinvent it.
+   **Then:** Confirm the outcome and measure of success; restate
    the smallest end-to-end, reversible slice.
 2. **Criteria become checks first (red before green).** Turn each acceptance
    criterion into an executable check before the implementation; a criterion you
