@@ -46,6 +46,6 @@ working approach today.
 ## Output
 
 A decomposition plan (parts, hazard files, assignments, completion criteria)
-for the main session to dispatch, plus — once those dispatches return — work
+for the main session to dispatch, plus (once those dispatches return) work
 tracked to the quality bar, blockers cleared or escalated, and any capability
 mismatch flagged for a human decision.

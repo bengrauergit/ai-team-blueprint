@@ -14,7 +14,7 @@ kind: local
 # Claude Code source leaves as prose-only discipline ("you mutate nothing")
 # by making it mechanical instead. Confirm these tool names against your
 # installed Gemini CLI version (`gemini tools list` or equivalent) before
-# relying on the list — built-in tool names are not yet independently
+# relying on the list. Built-in tool names are not yet independently
 # verified in this port.
 tools:
   - read_file

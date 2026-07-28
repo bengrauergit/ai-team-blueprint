@@ -7,7 +7,7 @@ team, solo or on a small team.
 
 Gemini's `gemini-extension.json` manifest has no field for the metadata below
 (author, license, category, example prompts), unlike the equivalent Codex
-plugin manifest — hence this README carries it instead.
+plugin manifest, hence this README carries it instead.
 
 - **Author:** Ben Grauer ([github.com/bengrauergit](https://github.com/bengrauergit))
 - **License:** MIT
@@ -37,7 +37,7 @@ picks up changes on future releases.
 1. **`hooks/hooks.json`** registers a `BeforeTool` hook that can DENY a shell
    command (the commit gate) and an `AfterAgent` hook that logs subagent usage.
    Read `scripts/pre-commit-check.sh` and `scripts/subagent-log.sh` before
-   installing an extension whose hooks you have not reviewed — this is good
+   installing an extension whose hooks you have not reviewed; this is good
    practice for any extension, not specific to this one.
 2. **Two hook-config details are unverified against a live Gemini CLI
    install**, carried over from the raw project-template port: the exact
@@ -54,7 +54,7 @@ Claude Code blueprint calls "routines" (external cron/CI is still required);
 the `run-build-loop` skill has no schema-validated tester verdict or live
 token-budget floor, both losses relative to Claude Code's native Workflow
 tool, and both named explicitly in the skill body; and the `agents/` directory
-bundled in this extension is a Gemini CLI PREVIEW feature — if your installed
+bundled in this extension is a Gemini CLI PREVIEW feature; if your installed
 CLI version doesn't yet load extension-bundled agents, copy the same files
 from `gemini/project-template/.gemini/agents/*.md` into your project directly
 instead (the tested, non-preview path).

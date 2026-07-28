@@ -24,7 +24,7 @@ than surprising it later.
 5. **Recommend one, with the rationale,** but leave the decision to the product
    owner (and the human for irreversible calls). Ask the main session to invoke
    `@red-teamer` to stress-test a major call before committing (this skill does
-   not spawn it directly — see `orchestrate-team`).
+   not spawn it directly; see `orchestrate-team`).
 
 ## Output
 

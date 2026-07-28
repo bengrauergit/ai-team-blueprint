@@ -63,7 +63,7 @@ dropped whole rule categories, including the "Working with the user" section
 `rules.md` itself explicitly says must never be demoted. This Gemini port
 deliberately does not repeat that: `GEMINI.md` is a full port of every section
 in the canonical `rules.md`. Gemini's memory model makes this the right call
-anyway — `GEMINI.md` files at different levels (your personal
+anyway: `GEMINI.md` files at different levels (your personal
 `~/.gemini/GEMINI.md`, this workspace file, any subdirectory-scoped files) are
 concatenated together every session rather than overriding each other, so
 there's no "make room" pressure the way a single-file-override model might
@@ -84,7 +84,7 @@ Then adapt:
 3. `.gemini/agents/data-steward.md` to the project's domain, or remove it.
 4. Each agent's `tools:` list, if your installed Gemini CLI version uses
    different built-in tool names than the ones assumed here (see the
-   "Unverified details" section below — check this before your first real
+   "Unverified details" section below; check this before your first real
    session, not after something silently doesn't work).
 
 Advisors (product-owner, red-teamer, reviewer, security,
@@ -93,7 +93,7 @@ data-analyst, data-steward, tester) get an explicit read-only `tools:`
 allow-list with no write/edit capability. The builder has no `tools:` key at
 all (full access, matching the Claude Code source). Documentation gets
 `write_file`/`replace` but its write scope to `docs/` only is a stated
-convention, not a mechanically enforced one — see the note in
+convention, not a mechanically enforced one; see the note in
 `.gemini/agents/documentation.md`.
 
 ## 3. Install the plugin (optional alternative to step 1)
@@ -110,7 +110,7 @@ gemini extensions install /path/to/gemini-plugin/ai-team-blueprint
 Both carry a full copy of `GEMINI.md`; running both loads the operating rules
 twice into every session. Pick one path, not both.
 
-Before installing, read `hooks/hooks.json` and the two scripts it registers —
+Before installing, read `hooks/hooks.json` and the two scripts it registers:
 this extension can deny a shell command (the commit gate) and logs subagent
 usage. Reviewing an extension's hooks before trusting them is good practice
 regardless of source.
@@ -201,7 +201,7 @@ Named explicitly, not silently absorbed:
   this port: the relevant agent recommends a decomposition, and the MAIN
   SESSION dispatches each part as a top-level `@agent_name` call.
 
-## Unverified details — confirm before you rely on the hooks
+## Unverified details: confirm before you rely on the hooks
 
 Two things in this port are stated as best-effort inference, not confirmed
 fact, because no live Gemini CLI install was available while building it:
@@ -214,8 +214,8 @@ fact, because no live Gemini CLI install was available while building it:
 3. (Plugin only) Whether `${extensionPath}` substitution, confirmed for an
    extension's `mcpServers` block, also resolves inside `hooks.json` commands.
 
-Run the failure case for each hook after install — attempt a commit that
-should fail the gate and confirm it's actually denied — before trusting any
+Run the failure case for each hook after install: attempt a commit that
+should fail the gate and confirm it's actually denied, before trusting any
 of this in a real session. This is the blueprint's own "verify every
 guardrail actually fires" rule, applied to its own port.
 
@@ -230,5 +230,5 @@ data-steward, red-teamer) where determinism is more valuable than variety;
 leave it unset elsewhere.
 
 Subagents cannot invoke further subagents on this platform (no `max_depth`
-knob to raise, unlike the Codex port) — orchestration stays with the main
+knob to raise, unlike the Codex port); orchestration stays with the main
 session by design, not by a configurable limit. See "Known gaps" above.

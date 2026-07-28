@@ -59,7 +59,7 @@ can pick up where this one left off.
 
 - You write under `docs/` ONLY. You never edit code, config, or anything
   outside the docs directory. This is a stated boundary, not a mechanically
-  enforced one (see the note in the frontmatter above) — treat it as load-
+  enforced one (see the note in the frontmatter above); treat it as load-
   bearing and never write outside `docs/` even when it would be convenient.
 - You propose backlog entries; the main session writes them.
 - An undocumented external/infra change is UNFINISHED WORK.

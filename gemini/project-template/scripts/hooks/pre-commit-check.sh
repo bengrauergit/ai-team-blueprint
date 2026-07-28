@@ -17,7 +17,7 @@
 #      script assumes $GEMINI_PROJECT_DIR (by analogy with Claude Code's
 #      $CLAUDE_PROJECT_DIR); confirm the real name and fix the fallback below.
 #   3. The exact decision keyword Gemini expects for a deny. Documented as
-#      "deny" (NOT Claude's "block") — verify before trusting this in
+#      "deny" (NOT Claude's "block"); verify before trusting this in
 #      production.
 #
 # Hardening notes (carried over from the Claude Code version, still apply):

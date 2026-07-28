@@ -12,7 +12,7 @@ code-writing agent; the tester is independent and edits nothing.
 (`workflows/build-loop.js`, which uses Claude Code's native Workflow tool):
 this skill has no equivalent of a JSON-Schema-validated tester verdict, and no
 live token-budget escalation floor. Both are named explicitly below rather
-than silently dropped — read the two callouts before relying on this loop for
+than silently dropped. Read the two callouts before relying on this loop for
 anything high-stakes.
 
 1. Read `GEMINI.md` and `docs/agents/context.md`.
@@ -23,7 +23,7 @@ anything high-stakes.
    implementation where the stack allows, implement the thinnest complete
    slice, verify the real runtime, and return an evidence block.
 5. After the builder finishes, invoke `@tester` with the original criteria.
-   **Capability loss #1 — no schema validation:** Claude Code's Workflow tool
+   **Capability loss #1, no schema validation:** Claude Code's Workflow tool
    requests a JSON-Schema-typed `{done, failures, receipts}` object and the
    platform rejects a malformed response. Gemini subagents return free text,
    so there is no enforced contract. Instead, require the tester to return
@@ -40,11 +40,11 @@ anything high-stakes.
 7. If `DONE: false`, send only the concrete `FAILURES` and reproduction steps
    back to the builder, increment the pass, and repeat from step 4.
 8. Stop after five passes.
-   **Capability loss #2 — no live token-budget floor:** Claude Code's version
+   **Capability loss #2, no live token-budget floor:** Claude Code's version
    also escalates early when `budget.remaining() < 30_000` mid-loop. Gemini
    has no equivalent live budget signal available to this skill. The
    substitute guard is the `max_turns` / `timeout_mins` frontmatter fields on
-   `.gemini/agents/builder.md` and `.gemini/agents/tester.md` — keep those
+   `.gemini/agents/builder.md` and `.gemini/agents/tester.md`; keep those
    tightened (not left at the 30-turn / 10-minute defaults) so a single pass
    cannot run away silently. Treat this as a bounded-turns proxy, not a real
    budget check, and say so if you escalate because of it.

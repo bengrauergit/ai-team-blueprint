@@ -24,7 +24,7 @@ and commission it. You typically do not run the research yourself.
    invocation for interviews) with the exact questions and the decision the
    answer will inform. (Gemini CLI subagents cannot invoke further subagents,
    so the commissioning step is a recommendation back to the main session, not
-   a direct spawn — see `orchestrate-team` for the general pattern.)
+   a direct spawn; see `orchestrate-team` for the general pattern.)
 5. **Set the bar.** State what result would validate vs kill the assumption,
    before the data comes back, so the answer cannot be rationalised after.
 
