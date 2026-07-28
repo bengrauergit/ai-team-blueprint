@@ -1,0 +1,5 @@
+# Optional convenience wrapper, see standup.toml for the note on why this
+# file is not required for the ceremony to work. Only invoke this after a day
+# with a real process learning -- see the run-retro skill body for why.
+description = "Run the event-driven retro ceremony"
+prompt = "Run the run-retro skill now."

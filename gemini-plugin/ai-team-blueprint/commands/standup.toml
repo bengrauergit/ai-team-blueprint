@@ -1,0 +1,6 @@
+# Optional convenience wrapper. Purely a shortcut: /standup types less than
+# asking Gemini to run the run-standup skill by name. Skipping this file
+# changes nothing functionally -- the skill still activates on its own
+# description when asked for directly.
+description = "Run the morning standup + plan-the-day ceremony"
+prompt = "Run the run-standup skill now."

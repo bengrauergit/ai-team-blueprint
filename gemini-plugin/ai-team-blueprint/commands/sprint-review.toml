@@ -1,0 +1,4 @@
+# Optional convenience wrapper, see standup.toml for the note on why this
+# file is not required for the ceremony to work.
+description = "Run the end-of-day sprint review ceremony"
+prompt = "Run the run-sprint-review skill now."

@@ -1,0 +1,33 @@
+{
+  "//1": "UNVERIFIED: ${extensionPath} substitution is confirmed by Gemini's docs for the mcpServers block of an extension manifest, but has NOT been separately confirmed here for hooks.json commands specifically. Test this against a real `gemini extensions install` before relying on it; if ${extensionPath} does not resolve inside hooks.json, fall back to an absolute path computed at install time, or ship this hooks.json disabled with an install-time TODO.",
+  "//2": "Also carries the two unverified details noted in gemini/project-template/.gemini/settings.json: the BeforeTool matcher's shell-tool name, and whether AfterAgent's payload field names match what scripts/subagent-log.sh assumes.",
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "run_shell_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${extensionPath}/scripts/pre-commit-check.sh\"",
+            "name": "pre-commit-check",
+            "timeout": 180,
+            "description": "Denies git commit when the fast gate fails"
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${extensionPath}/scripts/subagent-log.sh\"",
+            "name": "subagent-log",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

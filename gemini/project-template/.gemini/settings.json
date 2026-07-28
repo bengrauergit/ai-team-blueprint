@@ -1,0 +1,34 @@
+{
+  "//1": "Template for .gemini/settings.json. TRACK THIS FILE IN GIT so the hooks below are on for every clone, not just yours.",
+  "//2": "ALLOW list: auto-approve ONLY tools that are read-only AT THE SOURCE, e.g. a database MCP connector configured with a read-only role. Never blanket-allow a tool that CAN write just because you mostly read with it. Verify with a write probe and watch it get refused.",
+  "//3": "hooks.BeforeTool and hooks.AfterAgent below are UNVERIFIED against a live Gemini CLI install in two specific ways: the exact matcher string for the shell-execution tool, and the exact env var exposing the project root to hook subprocesses. See the comments in scripts/hooks/pre-commit-check.sh. Confirm both before relying on this in production.",
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "run_shell_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/scripts/hooks/pre-commit-check.sh\"",
+            "name": "pre-commit-check",
+            "timeout": 180,
+            "description": "Denies git commit when the fast gate fails"
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$GEMINI_PROJECT_DIR/scripts/hooks/subagent-log.sh\"",
+            "name": "subagent-log",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
