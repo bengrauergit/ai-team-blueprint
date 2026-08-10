@@ -200,6 +200,14 @@ Named explicitly, not silently absorbed:
   both originally assumed nested subagent spawning. Both were rewritten for
   this port: the relevant agent recommends a decomposition, and the MAIN
   SESSION dispatches each part as a top-level `@agent_name` call.
+- **No mechanical context-occupancy watcher.** The canonical blueprint's
+  `hooks/context-watch.sh` parses the session transcript's token-usage
+  fields at each prompt and, above a threshold, forces an explicit
+  continue-vs-handover choice to the user (paired with the
+  `session-handover` skill). Whether Gemini CLI exposes an equivalent
+  prompt-time hook with transcript access is unverified; this port falls
+  back to a prose rule in `GEMINI.md` (model judgment, no measurement),
+  which is weaker and is labelled as such in place.
 
 ## Unverified details: confirm before you rely on the hooks
 

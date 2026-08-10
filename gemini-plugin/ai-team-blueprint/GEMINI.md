@@ -70,6 +70,8 @@ Sessions are stateless and environments are ephemeral. The only durable memory i
 
 - **If you find undocumented infra state, write it down.** Leave the repo more knowable than you found it.
 
+- **Hand over before the session degrades, and make it the user's call.** Sessions lose quality and gain cost as context grows, well before compression lossily summarizes it away. When the session has grown long (many files read, many decisions made), surface an explicit continue-vs-handover choice to the user, never a silent decision. On handover: checkpoint commit, author `HANDOVER.md` from live context (what does NOT survive in git: live decisions, dead ends, open questions), push, hand the user the exact restart step. The successor's first duty is to read it, then delete it: a stale handover is worse than none. [Gemini port note: the canonical version pairs this with a `context-watch` hook that MEASURES context occupancy from the transcript and triggers the offer mechanically; whether Gemini CLI exposes an equivalent prompt-time hook with transcript access is UNVERIFIED, so here the trigger is the model's own judgment: weaker, and honestly so.]
+
 ## User-facing content
 
 - **Trace every link to where it actually lands for that recipient.** An organiser and an invitee often need different pages. Never infer the destination from a URL's name.

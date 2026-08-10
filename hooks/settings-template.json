@@ -14,7 +14,19 @@
       "mcp__<FULL_CONNECTOR>__apply_migration"
     ]
   },
+  "//5": "context-watch threshold: override with CONTEXT_WATCH_THRESHOLD (default 120000 tokens). It warns and puts the choice to the user; it never resets anything itself.",
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"$CLAUDE_PROJECT_DIR/scripts/hooks/context-watch.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",

@@ -18,6 +18,7 @@ said one thing; the machine did another, for weeks.
 | `pre-commit-check.sh` | PreToolUse (Bash) | Blocks `git commit` when your check command fails (default `tsc --noEmit`; swap in your linter/tests) |
 | `subagent-log.sh` | SubagentStop | Appends one JSONL line per subagent run: measure which agents earn their seats before restructuring the roster |
 | `pre-push` | git pre-push | Blocks direct pushes to `main`; merges go through a PR + the review gate |
+| `context-watch.sh` | UserPromptSubmit | Estimates context occupancy from the transcript's token usage; above a threshold, injects a directive making the model put an explicit continue-vs-handover choice to the user (the handover itself is `skills/session-handover`) |
 
 ## Hard-won rules for hooks themselves
 
@@ -38,3 +39,11 @@ said one thing; the machine did another, for weeks.
 4. **Hook environments are not your interactive shell.** `cd` to the project
    dir explicitly, call binaries by path (`./node_modules/.bin/tsc`, not
    `npx tsc`), and capture stdin before any heredoc consumes it.
+5. **A hook detects; the user decides.** For anything that would discard live
+   state (resetting a session, reverting work), the hook's job ends at
+   measuring and surfacing. `context-watch.sh` estimates context occupancy
+   and forces the model to put the continue-vs-handover choice to the user;
+   it never resets anything itself. A hook that silently "fixes" state
+   nobody reviewed is automation of exactly the wrong step. Pair it with a
+   SessionStart hook that cats `HANDOVER.md` into the successor session so
+   the handover is read without anyone remembering to paste it.
