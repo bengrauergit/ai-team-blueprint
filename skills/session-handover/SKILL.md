@@ -49,20 +49,27 @@ Push the branch (checkpoint commits and HANDOVER.md included). In an
 ephemeral environment, unpushed work does not survive the container; on a
 local machine this still makes the handover reachable from any other clone.
 
-## 4. Hand the user the restart, exactly
+## 4. Hand the user the reset, exactly
 
-Never end at "start a new session". Name the exact step for THIS environment:
+The default is an in-place reset, not a new session. Never end at "start
+fresh"; name the exact step for THIS environment:
 
-- Local CLI: "run `/clear`" or "quit and run `claude` again"; the new session
-  reads `HANDOVER.md` first (a SessionStart hook can inject it automatically;
-  see `hooks/README.md`).
-- Remote/web: name the button or command that opens a new session against
-  this repo and branch, and say to point it at `HANDOVER.md` in its first
-  message. If the environment offers a way to spawn the successor session
-  directly, offer to do it, with `HANDOVER.md` as its opening prompt.
+- Local CLI (default): "run `/clear`". Same terminal, same directory, one
+  command; the cleared context reads `HANDOVER.md` first (a SessionStart
+  hook on the `clear` source can inject it automatically; see
+  `hooks/README.md`). Be explicit with the user that `/clear` wipes
+  conversation memory as completely as a new session would: that wipe is
+  what recovers quality and cost, and `HANDOVER.md` is what carries the
+  state across it. Never offer "clear" as if it preserved anything.
+- Remote/web (where `/clear` may not exist): name the button or command
+  that opens a new session against this repo and branch, and say to point
+  it at `HANDOVER.md` in its first message. If the environment offers a way
+  to spawn the successor session directly, offer to do it, with
+  `HANDOVER.md` as its opening prompt.
 
 ## 5. Successor's first duty
 
-The first action in the new session: read `HANDOVER.md`, confirm the branch
-matches, then DELETE the file in the first commit of real work. A stale
-handover is worse than none; the next handover writes a fresh one.
+The first action after the reset (cleared context or new session alike):
+read `HANDOVER.md`, confirm the branch matches, then DELETE the file in the
+first commit of real work. A stale handover is worse than none; the next
+handover writes a fresh one.

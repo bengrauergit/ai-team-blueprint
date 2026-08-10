@@ -95,8 +95,11 @@ try:
         f"eventually fire silently. BEFORE doing anything else this turn, put "
         f"an explicit choice to the user: (a) continue in this session, or "
         f"(b) run the session-handover skill: commit a checkpoint, author "
-        f"HANDOVER.md, push, and start a fresh session from it. Recommend (b) "
-        f"unless the current task is nearly done. Do not decide silently; "
+        f"HANDOVER.md, push, then reset context in place with /clear (or a "
+        f"fresh session where /clear is unavailable). Recommend (b) unless "
+        f"the current task is nearly done. Be clear that /clear wipes memory "
+        f"as completely as a new session would; the handover doc is what "
+        f"carries the state across, in both cases. Do not decide silently; "
         f"the call is the user's."
     )
 except Exception:
