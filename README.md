@@ -28,6 +28,7 @@ This blueprint was developed while building and shipping a production web app so
 ├── loops.md                  # Where the system iterates: loops close, loops exit
 ├── prod-readiness-checklist.md  # Production-grade code: a checklist, not a new agent
 ├── design-md-template.md     # A design-system spec agents build UI from (generation-time)
+├── user-profile-template.md  # A communication contract: who your user is, how they want answers
 ├── skills/                   # Invocable skill templates (one dir each) + ceremony examples
 │   ├── examples.md           # Ceremony skills (standup, sprint review, weekly outcome review, retro)
 │   ├── po-intake/ ... /monitor-metrics/          # 6 product-owner skills
