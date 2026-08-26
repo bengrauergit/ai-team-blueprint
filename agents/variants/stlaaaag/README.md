@@ -11,7 +11,7 @@ Where your template is ahead of this variant, that is said below.
 
 Taken from a pre-publication copy of these templates around 8 July 2026, which
 is before this repo's first commit on 14 July. It ran independently for five
-weeks, then on 13 August it was merged back against the current templates. So
+weeks, then on 26 August it was merged back against the current templates. So
 this is a fork that diverged and came home, not a parallel invention.
 
 The context is largely non-software: documents, strategy decisions and small web
@@ -27,7 +27,7 @@ any agent whose name could also belong to someone in the room.
 
 ## What the log says
 
-53 invocations between 8 July and 10 August, reconstructed by parsing local
+61 invocations between 8 July and 23 August, reconstructed by parsing local
 session transcripts and de-duplicating. That reconstruction was only necessary
 because `hooks/subagent-log.sh` was not installed. The rule in `rules.md`
 ("measure before you elaborate the roster") is correct and this variant learned
@@ -35,13 +35,13 @@ it the slow way. The hook is installed now.
 
 | Variant | Template | Calls | Share |
 |---|---|---:|---:|
-| jackson | red-teamer | 22 | 42% |
-| bens-nikhil | behavioural-scientist | 18 | 34% |
-| sylvia | product-owner | 9 | 17% |
-| brendan | builder | 3 | 6% |
+| jackson | red-teamer | 26 | 43% |
+| bens-nikhil | behavioural-scientist | 21 | 34% |
+| sylvia | product-owner | 9 | 15% |
+| brendan | builder | 4 | 7% |
 | taichi | growth-hacker | 1 | 2% |
 | glyndon | data-steward | 0 | 0% |
-| hannah | (new) | n/a | added 13 Aug |
+| hannah | (new) | n/a | added 26 Aug |
 
 Two seats do three quarters of the work.
 
@@ -53,8 +53,8 @@ one advisor, multi-agent is expensive" economy rule beat the routing rule every
 tie, so the gatekeeper silently never spawned.
 
 This variant reproduces the starvation independently, with no economy rule
-written down anywhere. The product owner took 17% of 53 calls against the
-red-teamer's 42%. The pattern is consistent: work arrived already framed as a
+written down anywhere. The product owner took 15% of 61 calls against the
+red-teamer's 43%. The pattern is consistent: work arrived already framed as a
 thing to critique, and the seat that frames work got skipped in favour of the
 seat that attacks it. Nobody decided this. It is just that "pressure-test this"
 is an easier thought to have than "should this exist".
@@ -138,7 +138,7 @@ LIVE labelling rule verbatim, because it is the right rule in both worlds.
 
 You have six roles this variant did not install: reviewer, designer, tester,
 security, business-analyst, documentation. All were read, none were taken. The
-log above says two seats do 75% of the work and one has never run at all, so
+log above says two seats do 77% of the work and one has never run at all, so
 adding six idle seats is the exact failure `rules.md` warns about. Only hannah
 went in, because the log showed a real unserved question rather than an
 unoccupied role. Recording the non-adoption because "we read them and chose not
