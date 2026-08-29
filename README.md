@@ -28,6 +28,7 @@ This blueprint was developed while building and shipping a production web app so
 ├── loops.md                  # Where the system iterates: loops close, loops exit
 ├── prod-readiness-checklist.md  # Production-grade code: a checklist, not a new agent
 ├── design-md-template.md     # A design-system spec agents build UI from (generation-time)
+├── user-profile-template.md  # A communication contract: who your user is, how they want answers
 ├── skills/                   # Invocable skill templates (one dir each) + ceremony examples
 │   ├── examples.md           # Ceremony skills (standup, sprint review, weekly outcome review, retro)
 │   ├── po-intake/ ... /monitor-metrics/          # 6 product-owner skills
@@ -54,9 +55,14 @@ This blueprint was developed while building and shipping a production web app so
 │   ├── install.sh            # One-command install into your project
 │   └── project-template/     # The blueprint, laid out the Codex-native way
 ├── codex-plugin/             # The blueprint packaged as a Codex plugin
+├── gemini/                   # GEMINI CLI USERS START HERE
+│   ├── install.sh            # One-command install into your project
+│   └── project-template/     # The blueprint, laid out the Gemini-CLI-native way
+├── gemini-plugin/            # The blueprint packaged as a Gemini CLI extension
 └── docs/
     ├── setup-guide.md        # Step-by-step setup for Claude Code
-    └── codex-setup-guide.md  # Step-by-step setup for Codex
+    ├── codex-setup-guide.md  # Step-by-step setup for Codex
+    └── gemini-setup-guide.md # Step-by-step setup for Gemini CLI (+ platform status note)
 ```
 
 ## The core idea
@@ -135,6 +141,30 @@ sh codex/install.sh /absolute/path/to/your/project
 Then adapt the context, fast check, CI commands, and domain data steward before
 using the team. See [`docs/codex-setup-guide.md`](docs/codex-setup-guide.md) for
 the complete walkthrough and Codex-specific trade-offs.
+
+## Quick start (Gemini CLI)
+
+The Gemini-CLI-native solution lives in two parts:
+
+- `gemini/project-template/`: `GEMINI.md`, custom subagents, project context,
+  backlog, Git hooks, and CI templates to copy into a project.
+- `gemini-plugin/ai-team-blueprint/`: installable skills and Gemini CLI
+  lifecycle hooks, including the bounded builder-to-tester loop, packaged as
+  a Gemini extension.
+
+Install the project template without overwriting existing guidance:
+
+```bash
+sh gemini/install.sh /absolute/path/to/your/project
+```
+
+Then adapt the context, commit-gate check, CI commands, and domain data
+steward before using the team. See
+[`docs/gemini-setup-guide.md`](docs/gemini-setup-guide.md) for the complete
+walkthrough, including a platform-status note (classic Gemini CLI is in
+maintenance mode as Google transitions users to a successor tool) and the
+list of capabilities this port cannot fully replicate (no native scheduler,
+no schema-validated build-loop verdict).
 
 ## What makes this different from "just use AI"
 

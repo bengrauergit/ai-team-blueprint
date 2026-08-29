@@ -1,0 +1,8 @@
+{
+  "name": "ai-team-blueprint",
+  "version": "0.1.0",
+  "description": "Gemini CLI skills, subagents, and enforcement hooks for running a disciplined AI software delivery team.",
+  "contextFileName": "GEMINI.md",
+  "excludeTools": [],
+  "mcpServers": {}
+}
